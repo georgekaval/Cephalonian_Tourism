@@ -1,24 +1,39 @@
 import React, { Component } from 'react'
-import AttractionShow from 'react'
+import AttractionShow from './AttractionShow'
 
 class AttractionsIndex extends Component {
   constructor(props){
     super(props)
     this.state = {
-      attraction: ''
+      showAttractionShowPage: false,
+      showAttractionIndex: true
     }
   }
 
-
+  handleClick = () => {
+    this.setState({
+      showAttractionShowPage: true,
+      showAttractionIndex: false
+    })
+  }
 
   render(){
     console.log(this.props.attractions);
     return(
       <>
-        <h1> Attractions Index Page </h1>
-        <ul>
-           <button>{this.props.attractions.name}</button>
-        </ul>
+        {
+          this.state.showAttractionIndex &&
+          <ul>
+            <button onClick={() => this.handleClick()}><img id='imageAttraction' src={this.props.attractions.image} alt={this.props.attractions.name}></img></button>
+             {this.props.attractions.name}
+          </ul>
+        }
+
+        {
+          this.state.showAttractionShowPage &&
+          <AttractionShow key={this.props.attractions._id} attractions={this.props.attractions}/>
+        }
+
       </>
     )
   }

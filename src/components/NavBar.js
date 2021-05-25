@@ -7,6 +7,7 @@ class NavBar extends Component {
 
     }
   }
+
   render(){
     return(
       <>

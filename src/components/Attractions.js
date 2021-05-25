@@ -17,7 +17,6 @@ class Attractions extends Component {
         credentials: "include"
       })
       const attractions = await response.json()
-      console.log(attractions)
       if(response.status === 200){
         this.setState({
           attractions: attractions
@@ -48,7 +47,7 @@ class Attractions extends Component {
           {this.state.attractions.data.map(attraction => {
             return(
               <>
-               <AttractionsIndex key={attraction.id} attractions={attraction} baseUrl={this.props.baseUrl}/>
+               <AttractionsIndex key={attraction._id} attractions={attraction} baseUrl={this.props.baseUrl}/>
               </>
             )
           })}
