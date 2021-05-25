@@ -10,7 +10,8 @@ class AppHome extends Component {
   render(){
     return(
       <>
-        <h1> Cephalonia </h1>
+        <h1>Home Page </h1>
+        <h2> Cephalonia </h2>
         <img id="homeImage" src="https://www.greece-is.com/wp-content/uploads/2016/07/KEFALONIA-fiskardo-06.jpg"></img>
         <p>Info Section</p>
       </>

@@ -1,7 +1,8 @@
 import './App.css';
 import React, { Component } from 'react'
-import IndexAttractions from './components/IndexAttractions'
+import Attractions from './components/Attractions'
 import AppHome from './components/AppHome'
+import NavBar from './components/NavBar'
 
 console.log(process.env.NODE_ENV);
 let baseUrl = "http://localhost:8000"
@@ -16,7 +17,7 @@ let baseUrl = "http://localhost:8000"
 
 // Review component holds state and the list of reviews, then have ReviewPost component as each individual review.  Can have a add function in the review component that I pass down to the ReviewPost components. Should I have state in the review component?  Why should i lift up state? Maybe the review component can just hold all the reviews in a list, and each review keep their own state?   Need to make a review component that shows the current reviews list on the attraction and has a button to add review.  When button is clicked a text box shows and a post button.  When posted it is pushed to review list.  The creator and admin both have ability to edit and delete a review.  It needs to link to the attraction it is made on.  All other users signed in can only see the reviews.  Someone not signed in can not see the reviews, just sees a "sign in to see the reviews!" type of thing.
 
-// AppHome component will be the main image and info about kefalonia.  Most of the home page type stuff I have in mind
+// AppHome component will be the main image and info about kefalonia.  Most of the home page type stuff I have in mind, need to figure out how to change pages without using modals.
 
 //NavBar will hold these children: LogIn, SignUp, LogOut, HomeScreenIcon
 
@@ -26,25 +27,33 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      show : true,
+      showHomePage: true,
+      showAttractionsPage: false
     }
   }
 
-  showAppHome = () => {
-    this.setState( { show: true })
-  }
-
-  hideAppHome = () => {
-    this.setState( { show: false })
+  handleClick = () => {
+    this.setState({
+      showAttractionsPage: true,
+      showHomePage: false
+    })
   }
 
   render(){
 
     return(
       <>
-        <AppHome />
-        <h1> Attractions </h1>
-        <IndexAttractions baseUrl={baseUrl} />
+        <NavBar />
+        {
+          this.state.showHomePage &&
+          <AppHome />
+        }
+        <button onClick={() => this.handleClick()}>See Attractions!</button>
+        {
+          this.state.showAttractionsPage &&
+          <Attractions baseUrl={baseUrl} />
+        }
+
 
 
       </>

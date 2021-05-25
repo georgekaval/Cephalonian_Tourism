@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
+import AttractionShow from 'react'
 
-class AttractionPage extends Component {
+class AttractionsIndex extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      attraction: ''
     }
   }
+
 
 
   render(){
     console.log(this.props.attractions);
     return(
       <>
+        <h1> Attractions Index Page </h1>
         <ul>
-
            <button>{this.props.attractions.name}</button>
         </ul>
       </>
@@ -22,4 +24,4 @@ class AttractionPage extends Component {
   }
 }
 
-export default AttractionPage
+export default AttractionsIndex

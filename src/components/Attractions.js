@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import AttractionPage from './AttractionPage'
+import AttractionsIndex from './AttractionsIndex'
 
-class IndexAttractions extends Component {
+class Attractions extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -42,11 +42,13 @@ class IndexAttractions extends Component {
     console.log(this.state.attractions.data)
     return(
       <>
+        <h1> Attractions Page </h1>
+        <h2>Attractions</h2>
         <ul>
           {this.state.attractions.data.map(attraction => {
             return(
               <>
-               <AttractionPage key={attraction.id} attractions={attraction}/>
+               <AttractionsIndex key={attraction.id} attractions={attraction} baseUrl={this.props.baseUrl}/>
               </>
             )
           })}
@@ -55,4 +57,4 @@ class IndexAttractions extends Component {
     )
   }
 }
-export default IndexAttractions
+export default Attractions
