@@ -7,10 +7,16 @@ class AttractionPage extends Component {
 
     }
   }
+
+
   render(){
+    console.log(this.props.attractions);
     return(
       <>
-        <h1>Hello</h1>
+        <ul>
+
+           <button>{this.props.attractions.name}</button>
+        </ul>
       </>
     )
   }

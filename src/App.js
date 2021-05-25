@@ -1,6 +1,7 @@
 import './App.css';
 import React, { Component } from 'react'
 import IndexAttractions from './components/IndexAttractions'
+import AppHome from './components/AppHome'
 
 console.log(process.env.NODE_ENV);
 let baseUrl = "http://localhost:8000"
@@ -25,17 +26,23 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      show : true,
     }
   }
 
+  showAppHome = () => {
+    this.setState( { show: true })
+  }
 
-
+  hideAppHome = () => {
+    this.setState( { show: false })
+  }
 
   render(){
 
     return(
       <>
+        <AppHome />
         <h1> Attractions </h1>
         <IndexAttractions baseUrl={baseUrl} />
 
