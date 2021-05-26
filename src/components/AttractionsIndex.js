@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AttractionShow from './AttractionShow'
+import NewAttraction from './NewAttraction'
 
 class AttractionsIndex extends Component {
   constructor(props){
@@ -53,6 +54,14 @@ class AttractionsIndex extends Component {
     }
   }
 
+  addAttraction = (newAttraction) => {
+    const copyAttractions = [...this.state.attractions]
+    copyAttractions.push(newAttraction.data)
+    this.setState({
+      attractions: copyAttractions
+    })
+  }
+
   componentDidMount(){
     console.log('mounting');
     this.getAttraction()
@@ -71,17 +80,20 @@ class AttractionsIndex extends Component {
 
         {
           this.state.showAttractionIndex &&
-          <ul  className="indexStyle">
-            {this.state.attractions.data.map(attraction => {
-              return(
-                <div key={attraction.id}>
-                  <h3 className="text">{attraction.name}</h3>
-                  <br></br>
-                  <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
-                </div>
-              )
-            })}
-          </ul>
+          <>
+            <ul  className="indexStyle">
+              {this.state.attractions.data.map(attraction => {
+                return(
+                  <div key={attraction.id}>
+                    <h3 className="text">{attraction.name}</h3>
+                    <br></br>
+                    <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
+                  </div>
+                )
+              })}
+            </ul>
+          <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
+          </>
         }
 
         {

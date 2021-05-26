@@ -5,9 +5,9 @@ function AttractionShow(props){
   return(
 
     <div className="background">
-      <img className='homeImage' src={props.attraction.data.image} alt={props.attraction.data.name}></img>
-      <br></br>
       <h3 className="text">{props.attraction.data.name}</h3>
+      <br></br>
+      <img className='showImage' src={props.attraction.data.image} alt={props.attraction.data.name}></img>
       <br></br>
       <h3 className="text">{props.attraction.data.location}</h3>
       <br></br>
