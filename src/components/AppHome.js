@@ -9,12 +9,12 @@ class AppHome extends Component {
   }
   render(){
     return(
-      <>
-        <h1>Home Page </h1>
-        <h2> Cephalonia </h2>
-        <img id="homeImage" src="https://www.greece-is.com/wp-content/uploads/2016/07/KEFALONIA-fiskardo-06.jpg"></img>
-        <p>Info Section</p>
-      </>
+      <div>
+
+        <h2 className="text"> Cephalonia </h2>
+        <img className="homeImage" src="https://www.greece-is.com/wp-content/uploads/2016/07/KEFALONIA-fiskardo-06.jpg"></img>
+        <p className="text">Info Section</p>
+      </div>
     )
   }
 }

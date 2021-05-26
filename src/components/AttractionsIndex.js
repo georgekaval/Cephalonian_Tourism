@@ -12,6 +12,7 @@ class AttractionsIndex extends Component {
     }
   }
 
+// Need to make the click only show the attraction clicked, currently since the map function in render, it is running handleClick() for all attractions.
   handleClick = async (id) => {
     const url = this.props.baseUrl + '/api/v1/attractions/' + id
     try{
@@ -66,17 +67,17 @@ class AttractionsIndex extends Component {
       return <span> Loading </span>
     }
     return(
-      <>
+      <div>
 
         {
           this.state.showAttractionIndex &&
-          <ul>
+          <ul  className="indexStyle">
             {this.state.attractions.data.map(attraction => {
               return(
-                <div key={attraction._id}>
-
-                  <button onClick={() => this.handleClick(attraction.id)}><img id= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
-                   {attraction.name}
+                <div key={attraction.id}>
+                  <h3 className="text">{attraction.name}</h3>
+                  <br></br>
+                  <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                 </div>
               )
             })}
@@ -85,10 +86,10 @@ class AttractionsIndex extends Component {
 
         {
           this.state.showAttractionShowPage &&
-          <AttractionShow key={this.state.attractions._id} attractions={this.state.attractions}/>
+          <AttractionShow attraction={this.state.attractionToBeShown}/>
         }
 
-      </>
+      </div>
     )
   }
 }

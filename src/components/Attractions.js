@@ -17,10 +17,9 @@ class Attractions extends Component {
 
 
     return(
-      <>
-        <h2>Attractions</h2>
+      <div>
         <AttractionsIndex baseUrl={this.props.baseUrl} />
-      </>
+      </div>
     )
   }
 }

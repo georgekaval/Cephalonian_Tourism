@@ -49,8 +49,9 @@ class App extends Component {
   render(){
 
     return(
-      <>
+      <div className="container">
         <NavBar />
+        <div className="background">
         {
           this.state.showHomePage
           ?
@@ -62,15 +63,15 @@ class App extends Component {
         {
           this.state.showHomePage
           ?
-          <button onClick={() => this.seeAttractractionClick()}>See Attractions!</button>
+          <button className="button" onClick={() => this.seeAttractractionClick()}>See Attractions!</button>
           :
-          <button onClick={() => this.seeHomePageClick()}>Back to Home</button>
+          <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
         }
 
 
+        </div>
 
-
-      </>
+      </div>
     )
   }
 }

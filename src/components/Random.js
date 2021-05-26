@@ -19,6 +19,8 @@
   })}
 </ul>
 
+
+
 {props.attractions.map(attraction => {
   return(
 
@@ -38,4 +40,22 @@
   )
 })}
 
-key={this.props.attractions._id} attractions={this.props.attractions}
+<AttractionShow key={this.state.attractions._id} attractions={this.state.attractions}/>
+
+<ul>
+  {this.state.attractions.data.map(attraction => {
+    return(
+      <>
+       <AttractionsIndex key={attraction._id} attractions={attraction} baseUrl={this.props.baseUrl}/>
+      </>
+    )
+  })}
+</ul>
+<button onClick={() => this.handleClick()}><img id='imageAttraction' src={this.state.attractions.image} alt={this.state.attractions.name}></img></button>
+ {this.state.attractions.name}
+
+ showPageState = (attraction) => {
+   this.setState({
+     attractionToBeShown: attraction
+   })
+ }
