@@ -6,32 +6,86 @@ class AttractionsIndex extends Component {
     super(props)
     this.state = {
       showAttractionShowPage: false,
-      showAttractionIndex: true
+      showAttractionIndex: true,
+      attractions: '',
+      attractionToBeShown: {}
     }
   }
 
-  handleClick = () => {
-    this.setState({
-      showAttractionShowPage: true,
-      showAttractionIndex: false
-    })
+  handleClick = async (id) => {
+    const url = this.props.baseUrl + '/api/v1/attractions/' + id
+    try{
+      const response = await fetch(url, {
+        credentials: "include",
+        method: "GET"
+      })
+      if(response.status === 200){
+        const showAttraction = await response.json()
+        this.setState({
+          attractionToBeShown: showAttraction,
+          showAttractionShowPage: true,
+          showAttractionIndex: false,
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err);
+    }
   }
 
+  getAttraction = async () => {
+    const url = this.props.baseUrl + '/api/v1/attractions/'
+    try{
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include"
+      })
+      const attractions = await response.json()
+      if(response.status === 200){
+        this.setState({
+          attractions: attractions
+        })
+      }
+    }
+    catch(err) {
+      console.log('Error: ', err)
+    }
+  }
+
+  componentDidMount(){
+    console.log('mounting');
+    this.getAttraction()
+  }
+
+
+
   render(){
-    console.log(this.props.attractions);
+    console.log(this.state.attractions)
+    console.log(this.state.attractions.data)
+    if (!this.state.attractions){
+      return <span> Loading </span>
+    }
     return(
       <>
+
         {
           this.state.showAttractionIndex &&
           <ul>
-            <button onClick={() => this.handleClick()}><img id='imageAttraction' src={this.props.attractions.image} alt={this.props.attractions.name}></img></button>
-             {this.props.attractions.name}
+            {this.state.attractions.data.map(attraction => {
+              return(
+                <div key={attraction._id}>
+
+                  <button onClick={() => this.handleClick(attraction.id)}><img id= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
+                   {attraction.name}
+                </div>
+              )
+            })}
           </ul>
         }
 
         {
           this.state.showAttractionShowPage &&
-          <AttractionShow key={this.props.attractions._id} attractions={this.props.attractions}/>
+          <AttractionShow key={this.state.attractions._id} attractions={this.state.attractions}/>
         }
 
       </>

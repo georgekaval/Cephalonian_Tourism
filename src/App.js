@@ -32,10 +32,17 @@ class App extends Component {
     }
   }
 
-  handleClick = () => {
+  seeAttractractionClick = () => {
     this.setState({
       showAttractionsPage: true,
       showHomePage: false
+    })
+  }
+
+  seeHomePageClick = () => {
+    this.setState({
+      showAttractionsPage: false,
+      showHomePage: true
     })
   }
 
@@ -45,14 +52,21 @@ class App extends Component {
       <>
         <NavBar />
         {
-          this.state.showHomePage &&
+          this.state.showHomePage
+          ?
           <AppHome />
-        }
-        <button onClick={() => this.handleClick()}>See Attractions!</button>
-        {
+          :
           this.state.showAttractionsPage &&
           <Attractions baseUrl={baseUrl} />
         }
+        {
+          this.state.showHomePage
+          ?
+          <button onClick={() => this.seeAttractractionClick()}>See Attractions!</button>
+          :
+          <button onClick={() => this.seeHomePageClick()}>Back to Home</button>
+        }
+
 
 
 
