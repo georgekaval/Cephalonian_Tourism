@@ -9,7 +9,10 @@ class AttractionsIndex extends Component {
       showAttractionShowPage: false,
       showAttractionIndex: true,
       attractions: '',
-      attractionToBeShown: {}
+      attractionToBeShown: {},
+      createEditToggle: false,
+      createDeleteToggle: false,
+      attractionToBeEdited: {},
     }
   }
 
@@ -45,7 +48,7 @@ class AttractionsIndex extends Component {
       const attractions = await response.json()
       if(response.status === 200){
         this.setState({
-          attractions: attractions
+          attractions: attractions.data
         })
       }
     }
@@ -62,12 +65,64 @@ class AttractionsIndex extends Component {
     })
   }
 
+  handleEditSubmit = async (event) => {
+    event.preventDefault()
+    const url = this.props.baseUrl + '/api/v1/attractions/' + this.state.attractionToBeEdited.id
+    try{
+      const response = await fetch(url, {
+        credentials: "include",
+        method: "PUT",
+        body: JSON.stringify({
+          name: event.target.name.value,
+          location: event.target.location.value,
+          image: event.target.image.value,
+          info: event.target.info.value
+        }),
+        headers: {
+          'Content-Type' : 'application/json'
+        }
+      })
+      if(response.status === 200){
+        const updatedAttraction = await response.json()
+        const findIndex = this.state.attractions.findIndex(attraction => attraction.id ===
+        updatedAttraction.data.id)
+        const copyAttraction = [...this.state.attractions]
+
+        copyAttraction[findIndex] = updatedAttraction.data
+        this.setState({
+          createEditToggle: false,
+          attractions: copyAttraction
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err);
+    }
+  }
+
   componentDidMount(){
     console.log('mounting');
     this.getAttraction()
   }
 
+  handleEditToggle = (attraction) => {
+    this.setState({
+      createEditToggle: true,
+      attractionToBeEdited: attraction
+    })
+  }
 
+  handleDeleteToggle = () => {
+    this.setState({
+      createDeleteToggle: true
+    })
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
   render(){
     console.log(this.state.attractions)
@@ -82,23 +137,40 @@ class AttractionsIndex extends Component {
           this.state.showAttractionIndex &&
           <>
             <ul  className="indexStyle">
-              {this.state.attractions.data.map(attraction => {
+              {this.state.attractions.map(attraction => {
                 return(
                   <div key={attraction.id}>
                     <h3 className="text">{attraction.name}</h3>
                     <br></br>
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
+                    <br></br>
+                    <button onClick={() => this.handleEditToggle(attraction)}>Edit</button>
+                    <button onClick={() => this.handleDeleteToggle()}>Delete</button>
                   </div>
                 )
               })}
             </ul>
+            {
+              this.state.createEditToggle &&
+              <form onSubmit={this.handleEditSubmit}>
+                  <label>Name: </label>
+                  <input name='name' value={this.state.attractions.name} onChange={this.handleChange}/> <br></br>
+                  <label>Location: </label>
+                  <input name='location' value={this.state.attractions.location} onChange={this.handleChange}/> <br></br>
+                  <label>Image: </label>
+                  <input name='image' value={this.state.attractions.image} onChange={this.handleChange}/> <br></br>
+                  <label>Info: </label>
+                  <input name='info' value={this.state.attractions.info} onChange={this.handleChange}/> <br></br>
+                  <button content="Submit"> SUBMIT </button>
+                </form>
+            }
           <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
           </>
         }
 
         {
           this.state.showAttractionShowPage &&
-          <AttractionShow attraction={this.state.attractionToBeShown}/>
+          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} />
         }
 
       </div>
