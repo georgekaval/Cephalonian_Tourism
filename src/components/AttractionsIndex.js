@@ -100,6 +100,28 @@ class AttractionsIndex extends Component {
     }
   }
 
+  deleteAttraction = async (id) => {
+    const url = this.props.baseUrl + '/api/v1/attractions/' + id
+    try{
+      const response = await fetch(url, {
+        method: "DELETE",
+        credentials: "include"
+      })
+      if(response.status === 200){
+        const index = this.state.attractions.findIndex(attraction => attraction.id === id)
+        const copyAttractions = [...this.state.attractions]
+        copyAttractions.splice(index, 1)
+        this.setState({
+          attractions: copyAttractions,
+          createDeleteToggle: true
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err)
+    }
+  }
+
   componentDidMount(){
     console.log('mounting');
     this.getAttraction()
@@ -112,12 +134,6 @@ class AttractionsIndex extends Component {
     })
   }
 
-  handleDeleteToggle = () => {
-    this.setState({
-      createDeleteToggle: true
-    })
-  }
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -126,7 +142,6 @@ class AttractionsIndex extends Component {
 
   render(){
     console.log(this.state.attractions)
-    console.log(this.state.attractions.data)
     if (!this.state.attractions){
       return <span> Loading </span>
     }
@@ -145,7 +160,7 @@ class AttractionsIndex extends Component {
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
                     <button onClick={() => this.handleEditToggle(attraction)}>Edit</button>
-                    <button onClick={() => this.handleDeleteToggle()}>Delete</button>
+                    <button onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
                   </div>
                 )
               })}
