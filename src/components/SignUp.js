@@ -6,7 +6,8 @@ class SignUp extends Component{
     this.state={
       email: '',
       username: '',
-      password: ''
+      password: '',
+      signUpFormToggle: false
     }
   }
   handleChange = (event) => {
@@ -15,46 +16,65 @@ class SignUp extends Component{
     })
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    fetch(this.props.baseUrl + '/api/v1/users/register', {
-      credentials: "include",
-      method: "POST",
-      body: JSON.stringify({
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then( res => {
-      return res.json()
-    }).then(
-      this.setState({
-        email: '',
-        username: '',
-        password: '',
 
+  handleSubmit = async (event) => {
+    event.preventDefault()
+    const url = this.props.baseUrl + '/api/v1/users/register'
+    try{
+      const response = await fetch(url, {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-    ).catch(error => console.log({"Error": error}))
+      if(response.status === 200){
+        const user = await response.json()
+        this.props.signedInToggle()
+        this.props.userIsFound(user)
+        this.setState({
+          email: '',
+          username: '',
+          password: '',
+          signUpFormToggle: true
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err);
+    }
   }
+
   render(){
+
     return(
-        <form onSubmit={(evt) => this.handleSubmit(evt)}>
-          <h3>Sign Up </h3>
-          <br></br>
-          <label htmlFor="email">Email:</label>
-          <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
-          <br></br>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
-          <br></br>
-          <label htmlFor="password">Password:</label>
-          <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
-          <br></br>
-          <input type="submit" value="Sign Up"/>
-        </form>
+      <div>
+        {
+          this.state.signUpFormToggle
+          ?
+          <h3>{this.props.currentUser.data.username}</h3>
+          :
+          <form onSubmit={(evt) => this.handleSubmit(evt)}>
+            <h3>Sign Up </h3>
+            <br></br>
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
+            <br></br>
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
+            <br></br>
+            <label htmlFor="password">Password:</label>
+            <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
+            <br></br>
+            <input type="submit" value="Sign Up"/>
+          </form>
+        }
+      </div>
     )
   }
 }

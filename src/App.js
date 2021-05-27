@@ -30,7 +30,7 @@ class App extends Component {
     this.state = {
       showHomePage: true,
       showAttractionsPage: false,
-      currentUser: '',
+      
 
     }
   }
@@ -89,7 +89,9 @@ class App extends Component {
           ?
           <button className="button" onClick={() => this.seeAttractractionClick()}>See Attractions!</button>
           :
-          <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
+          <div className="footer">
+            <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
+          </div>
         }
 
 

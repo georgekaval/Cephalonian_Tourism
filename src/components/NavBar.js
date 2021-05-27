@@ -8,7 +8,8 @@ class NavBar extends Component {
     this.state = {
       signedIn: false,
       wantsToLogIn: false,
-      wantsToSignUp: false
+      wantsToSignUp: false,
+      currentUser: '',
 
     }
   }
@@ -24,12 +25,25 @@ class NavBar extends Component {
       wantsToLogIn: true
     })
   }
+
+  signedInToggle = () => {
+    this.setState({
+      signedIn: true
+    })
+  }
+
+  userIsFound = (user) => {
+    this.setState({
+      currentUser: user
+    })
+  }
 //Will want to implement there with a ternary operator
 //        <h3 className="navItem"> Log Out </h3>
 //        <h3 className="navItem"> Username </h3>
   render(){
     console.log(this.state.wantsToLogIn);
     console.log(this.state.wantsToSignUp);
+    console.log(this.state.currentUser);
     return(
       <div className="navBar">
 
@@ -39,8 +53,8 @@ class NavBar extends Component {
           !this.state.signedIn
           ?
           <>
-            <button onClick={() => this.seeSignUpToggle()}> Sign Up </button>
-            <button onClick={() => this.seeLogInToggle()}> Log In </button>
+            <button className="navItem" onClick={() => this.seeSignUpToggle()}> Sign Up </button>
+            <button className="navItem" onClick={() => this.seeLogInToggle()}> Log In </button>
           </>
           :
           <h3>{this.props.currentUser}</h3>
@@ -48,12 +62,12 @@ class NavBar extends Component {
         {
           this.state.wantsToSignUp
           &&
-          <SignUp baseUrl={this.props.baseUrl}/>
+          <SignUp baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser}/>
         }
         {
           this.state.wantsToLogIn
           &&
-          <LogIn baseUrl={this.props.baseUrl}/>
+          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound}/>
         }
 
 
