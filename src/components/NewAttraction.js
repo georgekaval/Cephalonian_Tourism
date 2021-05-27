@@ -78,7 +78,7 @@ class NewAttraction extends Component{
             <input type="submit" value="Add Attraction" />
           </form>
           :
-          <button onClick={() => this.handleToggle()}>Create Attraction</button>
+          <button className="button" onClick={() => this.handleToggle()}>Create Attraction</button>
         }
 
       </div>

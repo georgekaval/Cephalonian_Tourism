@@ -4,6 +4,7 @@ import Attractions from './components/Attractions'
 import AppHome from './components/AppHome'
 import NavBar from './components/NavBar'
 
+
 console.log(process.env.NODE_ENV);
 let baseUrl = "http://localhost:8000"
 
@@ -28,7 +29,9 @@ class App extends Component {
     super(props)
     this.state = {
       showHomePage: true,
-      showAttractionsPage: false
+      showAttractionsPage: false,
+      currentUser: '',
+
     }
   }
 
@@ -46,12 +49,33 @@ class App extends Component {
     })
   }
 
+  logoutUser = async (event) => {
+    const url = baseUrl + '/api/v1/users/logout'
+    try{
+      const response = await fetch(url, {
+        credentials: "include",
+        method: "GET"
+      })
+      const user = await response.json()
+      console.log(user)
+      if(response.status === 200){
+        this.setState({
+          currentUser: user
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err);
+    }
+  }
+
   render(){
+    console.log(this.state.currentUser)
 
     return(
       <div className="container">
-        <NavBar />
-        <div className="background">
+        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl}/>
+        <div>
         {
           this.state.showHomePage
           ?

@@ -159,8 +159,8 @@ class AttractionsIndex extends Component {
                     <br></br>
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
-                    <button onClick={() => this.handleEditToggle(attraction)}>Edit</button>
-                    <button onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
+                    <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
+                    <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
                   </div>
                 )
               })}
