@@ -80,7 +80,7 @@ class NavBar extends Component {
       <div className="navBar">
 
         <h3 className="navItem"> HomeScreenIcon </h3>
-        <h3 className="navItem"> Attractions </h3>
+        <button className="navItem" onClick={() => this.props.seeAttractractionClick()}> Attractions </button>
         {
           (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
           ?

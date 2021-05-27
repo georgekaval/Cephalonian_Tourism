@@ -62,6 +62,17 @@ body{
   font-family: 'Fredericka the Great', cursive;
 }
 
+.header{
+  font-size: 70px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.info{
+  margin-right: 250px;
+  margin-left: 250px;
+}
+
 .button{
   display: block;
   margin-left: auto;

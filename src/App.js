@@ -30,7 +30,7 @@ class App extends Component {
     this.state = {
       showHomePage: true,
       showAttractionsPage: false,
-      
+
 
     }
   }
@@ -74,7 +74,7 @@ class App extends Component {
 
     return(
       <div className="container">
-        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl}/>
+        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractractionClick={this.seeAttractractionClick}/>
         <div>
         {
           this.state.showHomePage
