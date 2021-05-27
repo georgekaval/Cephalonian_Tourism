@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LogIn from './LogIn'
 import SignUp from './SignUp'
 
+
 class NavBar extends Component {
   constructor(props){
     super(props)
@@ -9,6 +10,8 @@ class NavBar extends Component {
       signedIn: false,
       wantsToLogIn: false,
       wantsToSignUp: false,
+      wantsToLogOut: false,
+      logOutFormToggle: false,
       currentUser: '',
 
     }
@@ -26,6 +29,12 @@ class NavBar extends Component {
     })
   }
 
+  seeLogOutToggle = () => {
+    this.setState({
+      wantsToLogOut: true
+    })
+  }
+
   signedInToggle = () => {
     this.setState({
       signedIn: true
@@ -37,9 +46,32 @@ class NavBar extends Component {
       currentUser: user
     })
   }
-//Will want to implement there with a ternary operator
-//        <h3 className="navItem"> Log Out </h3>
-//        <h3 className="navItem"> Username </h3>
+
+  logoutUser = async (event) => {
+    const url = this.props.baseUrl + '/api/v1/users/logout'
+    try{
+      const response = await fetch(url, {
+        credentials: "include",
+        method: "GET"
+      })
+      const user = await response.json()
+      console.log(user)
+      if(response.status === 200){
+        this.setState({
+          currentUser: '',
+          logOutFormToggle: true,
+          wantsToLogIn: false,
+          wantsToSignUp: false,
+          signedIn: false
+        })
+      }
+    }
+    catch(err){
+      console.log('Error: ', err);
+    }
+  }
+  //When logging out, browser tries to go back to logged in page instead of back to before signed or logged in.
+  //Want to remove flex from navbar and relocate buttons such as sign up and log in on right, and username with logout close together.
   render(){
     console.log(this.state.wantsToLogIn);
     console.log(this.state.wantsToSignUp);
@@ -50,14 +82,17 @@ class NavBar extends Component {
         <h3 className="navItem"> HomeScreenIcon </h3>
         <h3 className="navItem"> Attractions </h3>
         {
-          !this.state.signedIn
+          (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
           ?
           <>
             <button className="navItem" onClick={() => this.seeSignUpToggle()}> Sign Up </button>
             <button className="navItem" onClick={() => this.seeLogInToggle()}> Log In </button>
           </>
           :
-          <h3>{this.props.currentUser}</h3>
+          <>
+            <h3>{this.props.currentUser}</h3>
+            <button className="navItem" onClick={() => this.logoutUser()}> Log Out </button>
+          </>
         }
         {
           this.state.wantsToSignUp
@@ -67,10 +102,8 @@ class NavBar extends Component {
         {
           this.state.wantsToLogIn
           &&
-          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser}/>
+          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} />
         }
-
-
 
       </div>
     )

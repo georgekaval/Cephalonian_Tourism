@@ -53,7 +53,7 @@ class LogIn extends Component{
     return(
       <div>
         {
-          this.state.logInFormToggle
+          (this.state.logInFormToggle && !this.props.logOutFormToggle)
           ?
           <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
           :
