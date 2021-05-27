@@ -6,7 +6,8 @@ class LogIn extends Component{
     this.state={
       email: '',
       password: '',
-      username: ''
+      username: '',
+      logInFormToggle: false
     }
   }
   handleChange = (event) => {
@@ -32,7 +33,15 @@ class LogIn extends Component{
           'Content-type': 'application/json'
         }})
       if(response.status === 200){
-        
+        const user = await response.json()
+        this.props.signedInToggle()
+        this.props.userIsFound(user)
+        this.setState({
+          email: '',
+          username: '',
+          password: '',
+          logInFormToggle: true
+        })
       }
     }
     catch(err){
@@ -42,20 +51,28 @@ class LogIn extends Component{
 
   render(){
     return(
-        <form onSubmit={(evt) => this.handleSubmit(evt)}>
-          <h3>Log In </h3>
-          <br></br>
-          <label htmlFor="email">Email:</label>
-          <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
-          <br></br>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
-          <br></br>
-          <label htmlFor="password">Password:</label>
-          <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
-          <br></br>
-          <input type="submit" value="Log In"/>
-        </form>
+      <div>
+        {
+          this.state.logInFormToggle
+          ?
+          <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
+          :
+          <form onSubmit={(evt) => this.handleSubmit(evt)}>
+            <br></br>
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
+            <br></br>
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
+            <br></br>
+            <label htmlFor="password">Password:</label>
+            <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
+            <br></br>
+            <input className="button" type="submit" value="Log In"/>
+          </form>
+        }
+
+      </div>
     )
   }
 }

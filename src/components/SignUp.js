@@ -57,10 +57,9 @@ class SignUp extends Component{
         {
           this.state.signUpFormToggle
           ?
-          <h3>{this.props.currentUser.data.username}</h3>
+          <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
           :
           <form onSubmit={(evt) => this.handleSubmit(evt)}>
-            <h3>Sign Up </h3>
             <br></br>
             <label htmlFor="email">Email:</label>
             <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
@@ -71,7 +70,7 @@ class SignUp extends Component{
             <label htmlFor="password">Password:</label>
             <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
             <br></br>
-            <input type="submit" value="Sign Up"/>
+            <input className="button" type="submit" value="Sign Up"/>
           </form>
         }
       </div>

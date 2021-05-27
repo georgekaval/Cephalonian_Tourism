@@ -67,7 +67,7 @@ class NavBar extends Component {
         {
           this.state.wantsToLogIn
           &&
-          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound}/>
+          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser}/>
         }
 
 
