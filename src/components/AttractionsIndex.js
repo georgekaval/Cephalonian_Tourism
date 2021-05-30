@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AttractionShow from './AttractionShow'
 import NewAttraction from './NewAttraction'
 
+
 class AttractionsIndex extends Component {
   constructor(props){
     super(props)
@@ -156,7 +157,6 @@ class AttractionsIndex extends Component {
                 return(
                   <div key={attraction.id}>
                     <h3 className="text">{attraction.name}</h3>
-                    <br></br>
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
                     <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
@@ -170,16 +170,21 @@ class AttractionsIndex extends Component {
               <form onSubmit={this.handleEditSubmit}>
                   <label>Name: </label>
                   <input name='name' value={this.state.attractions.name} onChange={this.handleChange}/> <br></br>
+
                   <label>Location: </label>
                   <input name='location' value={this.state.attractions.location} onChange={this.handleChange}/> <br></br>
+
                   <label>Image: </label>
                   <input name='image' value={this.state.attractions.image} onChange={this.handleChange}/> <br></br>
+
                   <label>Info: </label>
                   <input name='info' value={this.state.attractions.info} onChange={this.handleChange}/> <br></br>
+
                   <button content="Submit"> SUBMIT </button>
                 </form>
             }
-          <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
+            <br></br>
+            <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
           </>
         }
 

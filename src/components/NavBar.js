@@ -79,30 +79,27 @@ class NavBar extends Component {
     return(
       <div className="navBar">
 
-        <h3 className="navItem"> HomeScreenIcon </h3>
+        <button className="navItem" onClick={() => this.props.seeHomePageClick()}> Home </button>
         <button className="navItem" onClick={() => this.props.seeAttractractionClick()}> Attractions </button>
         {
           (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
-          ?
+          &&
           <>
             <button className="navItem" onClick={() => this.seeSignUpToggle()}> Sign Up </button>
             <button className="navItem" onClick={() => this.seeLogInToggle()}> Log In </button>
           </>
-          :
-          <>
-            <h3>{this.props.currentUser}</h3>
-            <button className="navItem" onClick={() => this.logoutUser()}> Log Out </button>
-          </>
+
+
         }
         {
           this.state.wantsToSignUp
           &&
-          <SignUp baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser}/>
+          <SignUp baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
         }
         {
           this.state.wantsToLogIn
           &&
-          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} />
+          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
         }
 
       </div>

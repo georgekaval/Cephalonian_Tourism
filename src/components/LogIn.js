@@ -55,7 +55,11 @@ class LogIn extends Component{
         {
           (this.state.logInFormToggle && !this.props.logOutFormToggle)
           ?
-          <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
+          <>
+            <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
+
+            <button className="button" onClick={() => this.props.logoutUser()}> Log Out </button>
+          </>
           :
           <form onSubmit={(evt) => this.handleSubmit(evt)}>
             <br></br>
