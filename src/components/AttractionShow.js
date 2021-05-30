@@ -21,7 +21,7 @@ class  AttractionShow extends Component{
         <br></br>
 
         <Reviews baseUrl={this.props.baseUrl}/>
-
+        <button className="button" onClick={() => this.props.backToAttractionIndex()}>Back to List of Attractions</button>
       </div>
     )
   }

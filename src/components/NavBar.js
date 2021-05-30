@@ -80,7 +80,7 @@ class NavBar extends Component {
       <div className="navBar">
 
         <button className="navItem" onClick={() => this.props.seeHomePageClick()}> Home </button>
-        <button className="navItem" onClick={() => this.props.seeAttractractionClick()}> Attractions </button>
+        <button className="navItem" onClick={() => this.props.seeAttractionClick()}> Attractions </button>
         {
           (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
           &&

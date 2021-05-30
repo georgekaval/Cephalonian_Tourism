@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react'
-import Attractions from './components/Attractions'
+import AttractionsIndex from './components/AttractionsIndex'
 import AppHome from './components/AppHome'
 import NavBar from './components/NavBar'
 
@@ -21,22 +21,27 @@ class App extends Component {
     super(props)
     this.state = {
       showHomePage: true,
-      showAttractionsPage: false,
-
+      showAttractionsIndex: false,
 
     }
   }
 
-  seeAttractractionClick = () => {
+  seeAttractionClick = () => {
     this.setState({
-      showAttractionsPage: true,
+      showAttractionsIndex: true,
       showHomePage: false
+    })
+  }
+
+  seeAttractionShowPage = () => {
+    this.setState({
+      showAttractionsIndex: false
     })
   }
 
   seeHomePageClick = () => {
     this.setState({
-      showAttractionsPage: false,
+      showAttractionsIndex: false,
       showHomePage: true
     })
   }
@@ -66,24 +71,23 @@ class App extends Component {
 
     return(
       <div className="container">
-        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractractionClick={this.seeAttractractionClick} seeHomePageClick={this.seeHomePageClick}/>
+        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractionClick={this.seeAttractionClick} seeHomePageClick={this.seeHomePageClick}/>
         <div>
         {
           this.state.showHomePage
           ?
-          <AppHome />
+          <>
+            <AppHome />
+            <button className="button" onClick={() => this.seeAttractionClick()}>See Attractions!</button>
+          </>
           :
-          this.state.showAttractionsPage &&
-          <Attractions baseUrl={baseUrl} />
-        }
-        {
-          this.state.showHomePage
-          ?
-          <button className="button" onClick={() => this.seeAttractractionClick()}>See Attractions!</button>
-          :
-          <div className="footer">
-            <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
-          </div>
+          <>
+            <AttractionsIndex baseUrl={baseUrl} showAttractionsIndex={this.state.showAttractionsIndex} seeAttractionShowPage={this.seeAttractionShowPage}/>
+            <div className="footer">
+              <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
+            </div>
+          </>
+
         }
 
 

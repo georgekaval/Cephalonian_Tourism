@@ -117,7 +117,7 @@ class Reviews extends Component{
         <table>
           {this.state.reviews.map(review => {
             return(
-              <div key={review.id}>
+              <tbody key={review.id}>
                 <tr>
                   <th className="text">Visitor</th>
                   <th className="text">Review</th>
@@ -126,7 +126,7 @@ class Reviews extends Component{
                   <td className="text">{review.user.username}</td>
                   <td className="text">{review.review}</td>
                 </tr>
-              </div>
+              </tbody>
             )
           })}
         </table>

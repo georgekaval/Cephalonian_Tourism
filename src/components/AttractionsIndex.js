@@ -8,12 +8,12 @@ class AttractionsIndex extends Component {
     super(props)
     this.state = {
       showAttractionShowPage: false,
-      showAttractionIndex: true,
       attractions: '',
       attractionToBeShown: {},
       createEditToggle: false,
       createDeleteToggle: false,
-      attractionToBeEdited: {},
+      attractionToBeEdited: {}
+
     }
   }
 
@@ -27,10 +27,11 @@ class AttractionsIndex extends Component {
       })
       if(response.status === 200){
         const showAttraction = await response.json()
+        this.props.seeAttractionShowPage()
         this.setState({
           attractionToBeShown: showAttraction,
           showAttractionShowPage: true,
-          showAttractionIndex: false,
+
         })
       }
     }
@@ -135,11 +136,20 @@ class AttractionsIndex extends Component {
     })
   }
 
+  backToAttractionIndex = () => {
+    this.setState({
+      showAttractionShowPage: false
+    })
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
+
+// Attractions button on nav only work while on home page
+// Edit form for attraction should show up closer to attraction and needs styling
 
   render(){
     console.log(this.state.attractions)
@@ -150,7 +160,7 @@ class AttractionsIndex extends Component {
       <div>
 
         {
-          this.state.showAttractionIndex &&
+          this.props.showAttractionsIndex &&
           <>
             <ul  className="indexStyle">
               {this.state.attractions.map(attraction => {
@@ -190,7 +200,7 @@ class AttractionsIndex extends Component {
 
         {
           this.state.showAttractionShowPage &&
-          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} />
+          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} backToAttractionIndex={this.backToAttractionIndex} />
         }
 
       </div>
