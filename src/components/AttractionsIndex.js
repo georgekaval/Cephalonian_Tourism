@@ -7,7 +7,6 @@ class AttractionsIndex extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showAttractionShowPage: false,
       attractions: '',
       attractionToBeShown: {},
       createEditToggle: false,
@@ -17,7 +16,7 @@ class AttractionsIndex extends Component {
     }
   }
 
-// Need to make the click only show the attraction clicked, currently since the map function in render, it is running handleClick() for all attractions.
+
   handleClick = async (id) => {
     const url = this.props.baseUrl + '/api/v1/attractions/' + id
     try{
@@ -27,12 +26,10 @@ class AttractionsIndex extends Component {
       })
       if(response.status === 200){
         const showAttraction = await response.json()
-        this.props.seeAttractionShowPage()
         this.setState({
           attractionToBeShown: showAttraction,
-          showAttractionShowPage: true,
-
         })
+        this.props.hideAttractionIndexPage()
       }
     }
     catch(err){
@@ -136,11 +133,6 @@ class AttractionsIndex extends Component {
     })
   }
 
-  backToAttractionIndex = () => {
-    this.setState({
-      showAttractionShowPage: false
-    })
-  }
 
   handleChange = (event) => {
     this.setState({
@@ -148,11 +140,13 @@ class AttractionsIndex extends Component {
     })
   }
 
-// Attractions button on nav only work while on home page
+
 // Edit form for attraction should show up closer to attraction and needs styling
 
   render(){
     console.log(this.state.attractions)
+    console.log(this.props.showAttractionShowPage);
+    console.log(this.props.showAttractionsIndex);
     if (!this.state.attractions){
       return <span> Loading </span>
     }
@@ -199,8 +193,8 @@ class AttractionsIndex extends Component {
         }
 
         {
-          this.state.showAttractionShowPage &&
-          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} backToAttractionIndex={this.backToAttractionIndex} />
+          this.props.showAttractionShowPage &&
+          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} hideAttractionShowPage={this.props.hideAttractionShowPage} />
         }
 
       </div>

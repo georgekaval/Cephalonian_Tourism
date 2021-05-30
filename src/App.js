@@ -22,20 +22,29 @@ class App extends Component {
     this.state = {
       showHomePage: true,
       showAttractionsIndex: false,
-
+      showAttractionShowPage: false
     }
   }
 
   seeAttractionClick = () => {
     this.setState({
       showAttractionsIndex: true,
-      showHomePage: false
+      showHomePage: false,
+      showAttractionShowPage: false
     })
   }
 
-  seeAttractionShowPage = () => {
+  hideAttractionIndexPage = () => {
     this.setState({
-      showAttractionsIndex: false
+      showAttractionsIndex: false,
+      showAttractionShowPage: true
+    })
+  }
+
+  hideAttractionShowPage = () => {
+    this.setState({
+      showAttractionShowPage: false,
+      showAttractionsIndex: true
     })
   }
 
@@ -82,7 +91,7 @@ class App extends Component {
           </>
           :
           <>
-            <AttractionsIndex baseUrl={baseUrl} showAttractionsIndex={this.state.showAttractionsIndex} seeAttractionShowPage={this.seeAttractionShowPage}/>
+            <AttractionsIndex baseUrl={baseUrl}  hideAttractionIndexPage={this.hideAttractionIndexPage} hideAttractionShowPage={this.hideAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndex={this.state.showAttractionsIndex}/>
             <div className="footer">
               <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
             </div>
