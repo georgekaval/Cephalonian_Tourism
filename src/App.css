@@ -58,8 +58,6 @@ html, body, #root{
   border: solid .2px white;
   width: 300px;
   height: 200px;
-
-
 }
 
 .text{
@@ -93,6 +91,40 @@ table{
   margin-right: auto;
 }
 
+.editForm{
+  width: 200px;
+  margin-top: 200px;;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: white;
+  border-width: thin;
+
+}
+
+.editReviewForm{
+  width: 200px;
+  position: relative;
+  left: 63%;
+  bottom: 80px;
+  border-color: white;
+  border-width: thin;
+
+}
+
+.textEditForm{
+  color: white;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+input{
+  width: 200px;
+  color: #1269C7;
+}
+
+
+
 .button{
   display: block;
   margin-left: auto;
@@ -104,6 +136,21 @@ table{
   border-color: white;
   font-family: 'Fredericka the Great', cursive;
 }
+
+.editButton{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  background-color: #1269C7;
+  border-style: outset;
+  border-color: white;
+  font-family: 'Fredericka the Great', cursive;
+}
+
 .footer{
   position: static;
   bottom: 0;

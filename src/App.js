@@ -41,6 +41,18 @@ class App extends Component {
     })
   }
 
+  showEditPage = () => {
+    this.setState({
+      showAttractionsIndex: false
+    })
+  }
+
+  showIndexPageFromEdit = () => {
+    this.setState({
+      showAttractionsIndex: true
+    })
+  }
+
   hideAttractionShowPage = () => {
     this.setState({
       showAttractionShowPage: false,
@@ -79,7 +91,7 @@ class App extends Component {
     console.log(this.state.currentUser)
 
     return(
-      <div className="container">
+      <div>
         <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractionClick={this.seeAttractionClick} seeHomePageClick={this.seeHomePageClick}/>
         <div>
         {
@@ -91,7 +103,7 @@ class App extends Component {
           </>
           :
           <>
-            <AttractionsIndex baseUrl={baseUrl}  hideAttractionIndexPage={this.hideAttractionIndexPage} hideAttractionShowPage={this.hideAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndex={this.state.showAttractionsIndex}/>
+            <AttractionsIndex baseUrl={baseUrl}  hideAttractionIndexPage={this.hideAttractionIndexPage} hideAttractionShowPage={this.hideAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndex={this.state.showAttractionsIndex} showEditPage={this.showEditPage} showIndexPageFromEdit={this.showIndexPageFromEdit}/>
             <div className="footer">
               <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
             </div>

@@ -92,6 +92,7 @@ class AttractionsIndex extends Component {
           createEditToggle: false,
           attractions: copyAttraction
         })
+        this.props.showIndexPageFromEdit()
       }
     }
     catch(err){
@@ -131,6 +132,7 @@ class AttractionsIndex extends Component {
       createEditToggle: true,
       attractionToBeEdited: attraction
     })
+    this.props.showEditPage()
   }
 
 
@@ -169,27 +171,33 @@ class AttractionsIndex extends Component {
                 )
               })}
             </ul>
-            {
-              this.state.createEditToggle &&
-              <form onSubmit={this.handleEditSubmit}>
-                  <label>Name: </label>
-                  <input name='name' value={this.state.attractions.name} onChange={this.handleChange}/> <br></br>
 
-                  <label>Location: </label>
-                  <input name='location' value={this.state.attractions.location} onChange={this.handleChange}/> <br></br>
-
-                  <label>Image: </label>
-                  <input name='image' value={this.state.attractions.image} onChange={this.handleChange}/> <br></br>
-
-                  <label>Info: </label>
-                  <input name='info' value={this.state.attractions.info} onChange={this.handleChange}/> <br></br>
-
-                  <button content="Submit"> SUBMIT </button>
-                </form>
-            }
             <br></br>
             <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
           </>
+        }
+        {
+          this.state.createEditToggle &&
+          <form className="editForm" onSubmit={this.handleEditSubmit}>
+
+              <label className="textEditForm">Name: </label>
+              <br></br>
+              <input name='name' value={this.state.attractions.name} placeholder={this.state.attractions.name} onChange={this.handleChange}/> <br></br>
+
+              <label className="textEditForm">Location: </label>
+              <br></br>
+              <input name='location' value={this.state.attractions.location} onChange={this.handleChange}/> <br></br>
+
+              <label className="textEditForm">Image: </label>
+              <br></br>
+              <input name='image' value={this.state.attractions.image} onChange={this.handleChange}/> <br></br>
+
+              <label className="textEditForm">Info: </label>
+              <br></br>
+              <textarea name='info' value={this.state.attractions.info} onChange={this.handleChange}/> <br></br>
+
+              <button className="editButton" content="Submit"> SUBMIT </button>
+            </form>
         }
 
         {

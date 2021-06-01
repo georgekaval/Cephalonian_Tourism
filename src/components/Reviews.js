@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
+import NewReview from './NewReview'
 
 class Reviews extends Component{
   constructor(props){
     super(props)
     this.state = {
-      reviews: [],
+      reviews: '',
       reviewToBeEdited: {},
-      createEditToggle: false
+      createEditToggle: false,
+      attraction: this.props.attraction
     }
   }
 
-  getReviews = async (id) => {
+  getReviews = async () => {
     const url = this.props.baseUrl + '/api/v1/reviews/'
     try{
       const response = await fetch(url, {
@@ -59,22 +61,28 @@ class Reviews extends Component{
     }
   }
 
-  handleEdit = async (event) => {
+  handleEditSubmit = async (event) => {
     event.preventDefault()
     const url = this.props.baseUrl + '/api/vi/reviews/' + this.state.reviewToBeEdited.id
+    console.log(event.target.review.value)
+    console.log(this.state.reviewToBeEdited.user);
+    console.log(this.state.reviewToBeEdited.attraction.id);
+
     try{
       const response = await fetch(url, {
         credentials: "include",
         method: "PUT",
         body: JSON.stringify({
           review: event.target.review.value,
-          user: event.target.user.value,
-          attraction: event.target.attraction.value
+          attraction: event.target.attraction.value,
+          user: event.target.user.value
         }),
         headers: {
           'Content-Type' : 'application/json'
         }
+
       })
+
       if(response.status === 200) {
         const updatedReview = await response.json()
         const findIndex = this.state.reviews.findIndex(review => review.id === updatedReview.data.id)
@@ -108,28 +116,54 @@ class Reviews extends Component{
       reviewToBeEdited: review
     })
   }
-
+// Edit not working, get a 404 in terminal and a cors error in console.
   render(){
+    console.log(this.state.attraction);
     console.log(this.state.reviews);
+    if (!this.state.reviews){
+      return <span> Loading </span>
+    }
     return(
       <div>
         <h1 className="text">Reviews</h1>
-        <table>
-          {this.state.reviews.map(review => {
-            return(
-              <tbody key={review.id}>
-                <tr>
-                  <th className="text">Visitor</th>
-                  <th className="text">Review</th>
-                </tr>
-                <tr>
-                  <td className="text">{review.user.username}</td>
-                  <td className="text">{review.review}</td>
-                </tr>
-              </tbody>
-            )
-          })}
-        </table>
+
+          <table>
+            {this.state.reviews.map(review => {
+              return(
+
+                  <tbody key={review.id}>
+                    <tr>
+                      <th className="text">Visitor</th>
+                      <th className="text">Review</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                    <tr>
+                      <td className="text">{review.user.username}</td>
+                      <td className="text">{review.review}</td>
+                      <td onClick={() => this.handleEditToggle(review)}> Edit </td>
+                      <td onClick={() => this.deleteReview(review.id)}>Delete</td>
+                    </tr>
+                  </tbody>
+
+              )
+            })}
+          </table>
+          <br></br>
+          <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
+          {
+          this.state.createEditToggle &&
+          <form className="editReviewForm" onSubmit={this.handleEditSubmit}>
+
+              <label className="textEditForm">Edit Review: </label>
+              <br></br>
+              <textarea name='review' value={this.state.reviewToBeEdited.review} placeholder={this.state.reviewToBeEdited.review} onChange={this.handleChange}/> <br></br>
+              <input name='attraction'  type="hidden" value={this.state.reviewToBeEdited.attraction.id}/>
+              <input name="user" type="hidden" value={this.state.reviewToBeEdited.user.id}/>
+              <button className="editButton" content="Submit"> SUBMIT CHANGES</button>
+            </form>
+          }
+
       </div>
     )
   }

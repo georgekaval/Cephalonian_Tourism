@@ -64,14 +64,17 @@ class SignUp extends Component{
           :
           <form onSubmit={(evt) => this.handleSubmit(evt)}>
             <br></br>
-            <label htmlFor="email">Email:</label>
+            <label className="text" htmlFor="email">Email:</label>
+            <br></br>
             <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
             <br></br>
-            <label htmlFor="username">Username:</label>
+            <label className="text" htmlFor="username">Username:</label>
+            <br></br>
             <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
             <br></br>
-            <label htmlFor="password">Password:</label>
-            <input type="text" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
+            <label className="text" htmlFor="password">Password:</label>
+            <br></br>
+            <input type="password" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
             <br></br>
             <input className="button" type="submit" value="Sign Up"/>
           </form>
