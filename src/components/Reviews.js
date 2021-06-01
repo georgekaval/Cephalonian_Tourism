@@ -41,7 +41,7 @@ class Reviews extends Component{
   }
 
   deleteReview = async (id) => {
-    const url = this.props.baseUrl + '/api/vi/reviews/' + id
+    const url = this.props.baseUrl + '/api/v1/reviews/' + id
     try{
       const response = await fetch(url, {
         method: "DELETE",
@@ -63,7 +63,7 @@ class Reviews extends Component{
 
   handleEditSubmit = async (event) => {
     event.preventDefault()
-    const url = this.props.baseUrl + '/api/vi/reviews/' + this.state.reviewToBeEdited.id
+    const url = this.props.baseUrl + '/api/v1/reviews/' + this.state.reviewToBeEdited.id
     console.log(event.target.review.value)
     console.log(this.state.reviewToBeEdited.user);
     console.log(this.state.reviewToBeEdited.attraction.id);
@@ -74,8 +74,8 @@ class Reviews extends Component{
         method: "PUT",
         body: JSON.stringify({
           review: event.target.review.value,
-          attraction: event.target.attraction.value,
-          user: event.target.user.value
+          attraction: this.state.attraction,
+
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -127,28 +127,17 @@ class Reviews extends Component{
       <div>
         <h1 className="text">Reviews</h1>
 
-          <table>
+          <ul>
             {this.state.reviews.map(review => {
               return(
-
-                  <tbody key={review.id}>
-                    <tr>
-                      <th className="text">Visitor</th>
-                      <th className="text">Review</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                    </tr>
-                    <tr>
-                      <td className="text">{review.user.username}</td>
-                      <td className="text">{review.review}</td>
-                      <td onClick={() => this.handleEditToggle(review)}> Edit </td>
-                      <td onClick={() => this.deleteReview(review.id)}>Delete</td>
-                    </tr>
-                  </tbody>
-
+                  <div key={review.id}>
+                      <h3 className="text">{review.user.username}:   {review.review} </h3>
+                      <button className="button" onClick={() => this.handleEditToggle(review)}> Edit </button>
+                      <button className="button" onClick={() => this.deleteReview(review.id)}>Delete</button>
+                  </div>
               )
             })}
-          </table>
+          </ul>
           <br></br>
           <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
           {
@@ -157,7 +146,7 @@ class Reviews extends Component{
 
               <label className="textEditForm">Edit Review: </label>
               <br></br>
-              <textarea name='review' value={this.state.reviewToBeEdited.review} placeholder={this.state.reviewToBeEdited.review} onChange={this.handleChange}/> <br></br>
+              <textarea name='review' value={this.state.attraction.review} placeholder={this.state.attraction.review} onChange={this.handleChange}/> <br></br>
               <input name='attraction'  type="hidden" value={this.state.reviewToBeEdited.attraction.id}/>
               <input name="user" type="hidden" value={this.state.reviewToBeEdited.user.id}/>
               <button className="editButton" content="Submit"> SUBMIT CHANGES</button>
