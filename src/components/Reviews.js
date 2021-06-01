@@ -64,25 +64,18 @@ class Reviews extends Component{
   handleEditSubmit = async (event) => {
     event.preventDefault()
     const url = this.props.baseUrl + '/api/v1/reviews/' + this.state.reviewToBeEdited.id
-    console.log(event.target.review.value)
-    console.log(this.state.reviewToBeEdited.user);
-    console.log(this.state.reviewToBeEdited.attraction.id);
-
     try{
       const response = await fetch(url, {
         credentials: "include",
         method: "PUT",
         body: JSON.stringify({
           review: event.target.review.value,
-          attraction: this.state.attraction,
-
+          attraction: this.state.attraction.id,
         }),
         headers: {
           'Content-Type' : 'application/json'
         }
-
       })
-
       if(response.status === 200) {
         const updatedReview = await response.json()
         const findIndex = this.state.reviews.findIndex(review => review.id === updatedReview.data.id)
@@ -116,7 +109,7 @@ class Reviews extends Component{
       reviewToBeEdited: review
     })
   }
-// Edit not working, get a 404 in terminal and a cors error in console.
+
   render(){
     console.log(this.state.attraction);
     console.log(this.state.reviews);
@@ -152,7 +145,6 @@ class Reviews extends Component{
               <button className="editButton" content="Submit"> SUBMIT CHANGES</button>
             </form>
           }
-
       </div>
     )
   }
