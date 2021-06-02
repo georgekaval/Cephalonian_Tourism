@@ -25,7 +25,11 @@ class  AttractionShow extends Component{
             <h3 className="text"> {this.state.attraction.location}</h3>
           </div>
         </div>
-        <Reviews baseUrl={this.props.baseUrl} attraction={this.state.attraction} currentUser={this.props.currentUser}/>
+        <Reviews 
+          baseUrl={this.props.baseUrl}
+          attraction={this.state.attraction}
+          currentUser={this.props.currentUser}
+        />
         <button className="button" onClick={() => this.props.seeAttractionIndexPage()}>Back to List of Attractions</button>
       </div>
 

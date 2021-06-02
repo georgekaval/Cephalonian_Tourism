@@ -19,6 +19,7 @@ class NewAttraction extends Component{
   }
 
   handleSubmit = async(event) => {
+    event.preventDefault()
     const url = this.props.baseUrl + '/api/v1/attractions/'
     try{
       const response = await fetch(url, {
@@ -43,6 +44,7 @@ class NewAttraction extends Component{
           image: '',
           info: ''
         })
+
       }
     }
     catch(err){

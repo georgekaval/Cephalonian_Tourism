@@ -16,6 +16,7 @@ class NewReview extends Component{
   }
 
   handleSubmit = async(event) => {
+    event.preventDefault()
     const url = this.props.baseUrl + '/api/v1/reviews/' + this.props.attraction.id
     try{
       const response = await fetch(url, {
@@ -28,12 +29,12 @@ class NewReview extends Component{
           'Content-Type': 'application/json'
         }
       })
-      if(response.status === 200){
+      if(response.status === 201){
         const createReview = await response.json()
         this.props.addReview(createReview)
         this.setState({
           review: '',
-
+          writeReview: false
         })
       }
     }
@@ -49,13 +50,14 @@ class NewReview extends Component{
   }
 
   render(){
+
     return(
       <div>
         {
-          this.state.createToggle
+          this.state.writeReview
           ?
           <form onSubmit={(evt) => this.handleSubmit(evt)}>
-            <label htmlFor="name">Review: </label>
+            <label className="text" htmlFor="name">Review: </label>
             <input type="text" id="review" name="review" onChange={(evt) => this.handleChange(evt)} value={this.state.review}/>
             <br></br>
             <input type="submit" value="Add Review" />

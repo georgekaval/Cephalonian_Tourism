@@ -150,13 +150,12 @@ class AttractionsIndex extends Component {
     console.log(this.props.showAttractionShowPage);
     console.log(this.props.showAttractionsIndexPage);
     console.log(this.props.currentUser);
-    console.log(this.props.currentUser.data.admin);
+    console.log(this.props.admin);
     if (!this.state.attractions){
       return <span> Loading </span>
     }
     return(
       <div>
-
         {
           this.props.showAttractionsIndexPage &&
           <>
@@ -168,8 +167,9 @@ class AttractionsIndex extends Component {
                     <h3 className="text">{attraction.name}</h3>
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
+
                     {
-                      this.props.currentUser.data.admin &&
+                      this.props.admin &&
                       <>
                         <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
                         <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
@@ -180,11 +180,16 @@ class AttractionsIndex extends Component {
                 )
               })}
             </ul>
+
             {
-              this.props.currentUser.data.admin &&
+              this.props.admin &&
               <>
                 <br></br>
-                <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
+                <NewAttraction
+                  baseUrl={this.props.baseUrl}
+                  addAttraction={this.addAttraction}
+                  seeAttractionIndexPage={this.props.seeAttractionIndexPage}
+                />
               </>
             }
 
@@ -216,7 +221,12 @@ class AttractionsIndex extends Component {
 
         {
           this.props.showAttractionShowPage &&
-          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown}  currentUser={this.props.currentUser} seeAttractionIndexPage={this.props.seeAttractionIndexPage}/>
+          <AttractionShow
+            baseUrl={this.props.baseUrl}
+            attraction={this.state.attractionToBeShown}
+            currentUser={this.props.currentUser}
+            seeAttractionIndexPage={this.props.seeAttractionIndexPage}
+          />
         }
 
       </div>

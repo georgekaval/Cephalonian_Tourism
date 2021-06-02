@@ -115,6 +115,7 @@ class Reviews extends Component{
     console.log(this.state.attraction);
     console.log(this.state.reviews);
     console.log(this.props.currentUser);
+    console.log('reviews rendered');
     if (!this.state.reviews){
       return <span> Loading </span>
     }
@@ -137,7 +138,11 @@ class Reviews extends Component{
           {
             this.props.currentUser
             ?
-            <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
+            <NewReview
+              baseUrl={this.props.baseUrl}
+              addReview={this.addReview}
+              attraction={this.state.attraction}
+            />
             :
             <h3>Log in to write a review!</h3>
           }

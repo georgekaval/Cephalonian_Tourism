@@ -15,7 +15,8 @@ class App extends Component {
       showHomePage: true,
       showAttractionsIndexPage: false,
       showAttractionShowPage: false,
-      currentUser: ''
+      currentUser: '',
+      admin: false
     }
   }
   // a few functions to help keep certain components hidden with my conditional rendering
@@ -63,7 +64,8 @@ class App extends Component {
 
   userIsFound = (user) => {
     this.setState({
-      currentUser: user
+      currentUser: user,
+      admin: user.data.admin
     })
   }
 
@@ -76,7 +78,13 @@ class App extends Component {
 
     return(
       <div>
-        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractionIndexPage={this.seeAttractionIndexPage} seeHomePageClick={this.seeHomePageClick} userIsFound={this.userIsFound} />
+        <NavBar
+        currentUser={this.state.currentUser}
+          baseUrl={baseUrl}
+          seeAttractionIndexPage={this.seeAttractionIndexPage} s
+          eeHomePageClick={this.seeHomePageClick}
+          userIsFound={this.userIsFound}
+        />
         <div>
         {
           this.state.showHomePage
@@ -87,7 +95,18 @@ class App extends Component {
           </>
           :
           <>
-            <AttractionsIndex baseUrl={baseUrl}  seeAttractionShowPage={this.seeAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndexPage={this.state.showAttractionsIndexPage} showEditPage={this.seeEditPage} seeIndexPageFromEdit={this.seeIndexPageFromEdit} currentUser={this.state.currentUser} seeAttractionIndexPage={this.seeAttractionIndexPage}/>
+            <AttractionsIndex
+              baseUrl={baseUrl}
+              seeAttractionShowPage={this.seeAttractionShowPage}
+              showAttractionShowPage={this.state.showAttractionShowPage}
+              showAttractionsIndexPage={this.state.showAttractionsIndexPage}
+              showEditPage={this.seeEditPage}
+              seeIndexPageFromEdit={this.seeIndexPageFromEdit}
+              currentUser={this.state.currentUser}
+              seeAttractionIndexPage={this.seeAttractionIndexPage}
+              admin={this.state.admin}
+
+            />
             <div className="footer">
               <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
             </div>
