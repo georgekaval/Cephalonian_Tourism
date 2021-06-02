@@ -8,7 +8,8 @@ class Reviews extends Component{
       reviews: '',
       reviewToBeEdited: {},
       createEditToggle: false,
-      attraction: this.props.attraction
+      attraction: this.props.attraction,
+      currentUser: this.props.currentUser
     }
   }
 
@@ -113,6 +114,7 @@ class Reviews extends Component{
   render(){
     console.log(this.state.attraction);
     console.log(this.state.reviews);
+    console.log(this.state.currentUser);
     if (!this.state.reviews){
       return <span> Loading </span>
     }
@@ -132,7 +134,14 @@ class Reviews extends Component{
             })}
           </ul>
           <br></br>
-          <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
+          {
+            this.state.currentUser
+            ?
+            <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
+            :
+            <h3>Log in to write a review!</h3>
+          }
+
           {
           this.state.createEditToggle &&
           <form className="editReviewForm" onSubmit={this.handleEditSubmit}>

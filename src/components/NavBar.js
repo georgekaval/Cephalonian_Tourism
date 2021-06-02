@@ -12,11 +12,11 @@ class NavBar extends Component {
       wantsToSignUp: false,
       wantsToLogOut: false,
       logOutFormToggle: false,
-      currentUser: '',
+
 
     }
   }
-
+  //removed currentUser from state , it was this.props.currentUser
   seeSignUpToggle = () => {
     this.setState({
       wantsToSignUp: true
@@ -40,12 +40,12 @@ class NavBar extends Component {
       signedIn: true
     })
   }
-
-  userIsFound = (user) => {
-    this.setState({
-      currentUser: user
-    })
-  }
+  //highlighted this out, also added .props to where i passed the functions down, also changed currentUser to props instead of state where i pass it down
+  // userIsFound = (user) => {
+  //   this.setState({
+  //     currentUser: user
+  //   })
+  // }
 
   logoutUser = async (event) => {
     const url = this.props.baseUrl + '/api/v1/users/logout'
@@ -70,12 +70,12 @@ class NavBar extends Component {
       console.log('Error: ', err);
     }
   }
-  //When logging out, browser tries to go back to logged in page instead of back to before signed or logged in.
+
   //Want to remove flex from navbar and relocate buttons such as sign up and log in on right, and username with logout close together.
   render(){
     console.log(this.state.wantsToLogIn);
     console.log(this.state.wantsToSignUp);
-    console.log(this.state.currentUser);
+    console.log(this.props.currentUser);
     return(
       <div className="navBar">
 
@@ -94,12 +94,12 @@ class NavBar extends Component {
         {
           this.state.wantsToSignUp
           &&
-          <SignUp baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
+          <SignUp baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle}  currentUser={this.props.currentUser} logoutUser={this.logoutUser} userIsFound={this.props.userIsFound}/>
         }
         {
           this.state.wantsToLogIn
           &&
-          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.userIsFound} currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
+          <LogIn baseUrl={this.props.baseUrl} signedInToggle={this.signedInToggle} userIsFound={this.props.userIsFound} currentUser={this.props.currentUser} logoutUser={this.logoutUser}/>
         }
 
       </div>

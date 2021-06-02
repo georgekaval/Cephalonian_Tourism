@@ -11,8 +11,8 @@ class AttractionsIndex extends Component {
       attractionToBeShown: {},
       createEditToggle: false,
       createDeleteToggle: false,
-      attractionToBeEdited: {}
-
+      attractionToBeEdited: {},
+      currentUser: this.props.currentUser
     }
   }
 
@@ -149,6 +149,7 @@ class AttractionsIndex extends Component {
     console.log(this.state.attractions)
     console.log(this.props.showAttractionShowPage);
     console.log(this.props.showAttractionsIndex);
+    console.log(this.state.currentUser);
     if (!this.state.attractions){
       return <span> Loading </span>
     }
@@ -166,15 +167,26 @@ class AttractionsIndex extends Component {
                     <h3 className="text">{attraction.name}</h3>
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
-                    <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
-                    <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
+                    {
+                      this.state.currentUser.admin &&
+                      <>
+                        <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
+                        <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
+                      </>
+                    }
+
                   </div>
                 )
               })}
             </ul>
+            {
+              this.state.currentUser.admin &&
+              <>
+              <br></br>
+              <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
+              </>
+            }
 
-            <br></br>
-            <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
           </>
         }
         {
@@ -203,7 +215,7 @@ class AttractionsIndex extends Component {
 
         {
           this.props.showAttractionShowPage &&
-          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} hideAttractionShowPage={this.props.hideAttractionShowPage} />
+          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} hideAttractionShowPage={this.props.hideAttractionShowPage} currentUser={this.state.currentUser}/>
         }
 
       </div>
