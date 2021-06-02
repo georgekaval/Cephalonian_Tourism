@@ -42,9 +42,22 @@ html, body, #root{
 
 .showImage{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  /* margin-left: auto;
+  margin-right: auto; */
+  width: 30%;
+  margin-left: 10%;
+
+}
+
+.showContainer{
+  display: flex;
+
+}
+
+.showInfo{
+  margin-left: 10%;
+  margin-right: 10%;
+  
 }
 
 .indexStyle{
@@ -58,12 +71,15 @@ html, body, #root{
   border: solid .2px white;
   width: 300px;
   height: 200px;
+  cursor: grab;
+
 }
 
 .text{
   color: white;
   text-align: center;
   font-family: 'Fredericka the Great', cursive;
+  font-size: 20px;
 }
 
 .header{

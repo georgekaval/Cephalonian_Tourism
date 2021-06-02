@@ -14,21 +14,28 @@ class  AttractionShow extends Component{
 
     return(
       <div>
-        <h3 className="text">{this.state.attraction.name}</h3>
+        <h1 className="header text">{this.state.attraction.name}</h1>
         <br></br>
+        <div className="showContainer">
 
-        <img className='showImage' src={this.state.attraction.image} alt={this.state.attraction.name}></img>
-        <br></br>
 
-        <h3 className="text">{this.state.attraction.location}</h3>
-        <br></br>
+          <img className='showImage' src={this.state.attraction.image} alt={this.state.attraction.name}></img>
 
-        <p className="text">{this.state.attraction.info}</p>
-        <br></br>
+          <div>
 
+
+            <p className="text showInfo">{this.state.attraction.info}</p>
+            <br></br>
+            <h3 className="text"> {this.state.attraction.location}</h3>
+
+          </div>
+
+
+        </div>
         <Reviews baseUrl={this.props.baseUrl} attraction={this.state.attraction}/>
         <button className="button" onClick={() => this.props.hideAttractionShowPage()}>Back to List of Attractions</button>
       </div>
+
     )
   }
 }

@@ -13,7 +13,7 @@ class Reviews extends Component{
   }
 
   getReviews = async () => {
-    const url = this.props.baseUrl + '/api/v1/reviews/'
+    const url = this.props.baseUrl + '/api/v1/reviews/' + this.state.attraction.id
     try{
       const response = await fetch(url, {
         method: "GET",

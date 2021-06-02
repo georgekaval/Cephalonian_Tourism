@@ -158,6 +158,7 @@ class AttractionsIndex extends Component {
         {
           this.props.showAttractionsIndex &&
           <>
+            <h1 className="header text">Attractions</h1>
             <ul  className="indexStyle">
               {this.state.attractions.map(attraction => {
                 return(
