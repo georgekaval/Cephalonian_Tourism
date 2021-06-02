@@ -12,7 +12,7 @@ class AttractionsIndex extends Component {
       createEditToggle: false,
       createDeleteToggle: false,
       attractionToBeEdited: {},
-      currentUser: this.props.currentUser
+
     }
   }
 
@@ -29,7 +29,7 @@ class AttractionsIndex extends Component {
         this.setState({
           attractionToBeShown: showAttraction,
         })
-        this.props.hideAttractionIndexPage()
+        this.props.seeAttractionShowPage()
       }
     }
     catch(err){
@@ -92,7 +92,7 @@ class AttractionsIndex extends Component {
           createEditToggle: false,
           attractions: copyAttraction
         })
-        this.props.showIndexPageFromEdit()
+        this.props.seeIndexPageFromEdit()
       }
     }
     catch(err){
@@ -132,7 +132,7 @@ class AttractionsIndex extends Component {
       createEditToggle: true,
       attractionToBeEdited: attraction
     })
-    this.props.showEditPage()
+    this.props.seeEditPage()
   }
 
 
@@ -148,8 +148,9 @@ class AttractionsIndex extends Component {
   render(){
     console.log(this.state.attractions)
     console.log(this.props.showAttractionShowPage);
-    console.log(this.props.showAttractionsIndex);
-    console.log(this.state.currentUser);
+    console.log(this.props.showAttractionsIndexPage);
+    console.log(this.props.currentUser);
+    console.log(this.props.currentUser.data.admin);
     if (!this.state.attractions){
       return <span> Loading </span>
     }
@@ -157,7 +158,7 @@ class AttractionsIndex extends Component {
       <div>
 
         {
-          this.props.showAttractionsIndex &&
+          this.props.showAttractionsIndexPage &&
           <>
             <h1 className="header text">Attractions</h1>
             <ul  className="indexStyle">
@@ -168,7 +169,7 @@ class AttractionsIndex extends Component {
                     <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
                     {
-                      this.state.currentUser.admin &&
+                      this.props.currentUser.data.admin &&
                       <>
                         <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
                         <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
@@ -180,10 +181,10 @@ class AttractionsIndex extends Component {
               })}
             </ul>
             {
-              this.state.currentUser.admin &&
+              this.props.currentUser.data.admin &&
               <>
-              <br></br>
-              <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
+                <br></br>
+                <NewAttraction baseUrl={this.props.baseUrl} addAttraction={this.addAttraction}/>
               </>
             }
 
@@ -215,7 +216,7 @@ class AttractionsIndex extends Component {
 
         {
           this.props.showAttractionShowPage &&
-          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown} hideAttractionShowPage={this.props.hideAttractionShowPage} currentUser={this.state.currentUser}/>
+          <AttractionShow baseUrl={this.props.baseUrl} attraction={this.state.attractionToBeShown}  currentUser={this.props.currentUser} seeAttractionIndexPage={this.props.seeAttractionIndexPage}/>
         }
 
       </div>

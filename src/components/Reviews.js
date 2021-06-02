@@ -9,7 +9,7 @@ class Reviews extends Component{
       reviewToBeEdited: {},
       createEditToggle: false,
       attraction: this.props.attraction,
-      currentUser: this.props.currentUser
+
     }
   }
 
@@ -114,7 +114,7 @@ class Reviews extends Component{
   render(){
     console.log(this.state.attraction);
     console.log(this.state.reviews);
-    console.log(this.state.currentUser);
+    console.log(this.props.currentUser);
     if (!this.state.reviews){
       return <span> Loading </span>
     }
@@ -135,7 +135,7 @@ class Reviews extends Component{
           </ul>
           <br></br>
           {
-            this.state.currentUser
+            this.props.currentUser
             ?
             <NewReview baseUrl={this.props.baseUrl} addReview={this.addReview} attraction={this.state.attraction}/>
             :

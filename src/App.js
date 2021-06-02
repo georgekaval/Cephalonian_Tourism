@@ -13,49 +13,50 @@ class App extends Component {
     super(props)
     this.state = {
       showHomePage: true,
-      showAttractionsIndex: false,
+      showAttractionsIndexPage: false,
       showAttractionShowPage: false,
       currentUser: ''
     }
   }
   // a few functions to help keep certain components hidden with my conditional rendering
-  seeAttractionClick = () => {
+
+  // Used to go from home page to attractions index page.
+  seeAttractionIndexPage = () => {
     this.setState({
-      showAttractionsIndex: true,
+      showAttractionsIndexPage: true,
       showHomePage: false,
       showAttractionShowPage: false
     })
   }
 
-  hideAttractionIndexPage = () => {
+  // Used to go to an attraction show page from the index page.
+  seeAttractionShowPage = () => {
     this.setState({
-      showAttractionsIndex: false,
-      showAttractionShowPage: true
+      showAttractionsIndexPage: false,
+      showAttractionShowPage: true,
+      showHomePage: false
     })
   }
 
-  showEditPage = () => {
+  // Used to hide index page and just show an edit form.
+  seeEditPage = () => {
     this.setState({
-      showAttractionsIndex: false
+      showAttractionsIndexPage: false
     })
   }
 
-  showIndexPageFromEdit = () => {
+  // Used to go back to the edit page when submitting the edit form.
+  seeIndexPageFromEdit = () => {
     this.setState({
-      showAttractionsIndex: true
+      showAttractionsIndexPage: true
     })
   }
 
-  hideAttractionShowPage = () => {
-    this.setState({
-      showAttractionShowPage: false,
-      showAttractionsIndex: true
-    })
-  }
-
+  // Used to go back to home screen from anywhere in the app.
   seeHomePageClick = () => {
     this.setState({
-      showAttractionsIndex: false,
+      showAttractionsIndexPage: false,
+      showAttractionShowPage: false,
       showHomePage: true
     })
   }
@@ -66,23 +67,27 @@ class App extends Component {
     })
   }
 
+  // Need a toggle so when a new review is created, it stays on attraction show page.
+  // If you put the wrong username or password in, the frontend still acts like logged in ex. says Hello !
+  // Need to fix how create review looks
+  // Need to fix how reviews look
   render(){
     console.log(this.state.currentUser)
 
     return(
       <div>
-        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractionClick={this.seeAttractionClick} seeHomePageClick={this.seeHomePageClick} userIsFound={this.userIsFound}/>
+        <NavBar currentUser={this.state.currentUser} baseUrl={baseUrl} seeAttractionIndexPage={this.seeAttractionIndexPage} seeHomePageClick={this.seeHomePageClick} userIsFound={this.userIsFound} />
         <div>
         {
           this.state.showHomePage
           ?
           <>
             <AppHome />
-            <button className="button" onClick={() => this.seeAttractionClick()}>See Attractions!</button>
+            <button className="button" onClick={() => this.seeAttractionIndexPage()}>See Attractions!</button>
           </>
           :
           <>
-            <AttractionsIndex baseUrl={baseUrl}  hideAttractionIndexPage={this.hideAttractionIndexPage} hideAttractionShowPage={this.hideAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndex={this.state.showAttractionsIndex} showEditPage={this.showEditPage} showIndexPageFromEdit={this.showIndexPageFromEdit} currentUser={this.state.currentUser}/>
+            <AttractionsIndex baseUrl={baseUrl}  seeAttractionShowPage={this.seeAttractionShowPage} showAttractionShowPage={this.state.showAttractionShowPage} showAttractionsIndexPage={this.state.showAttractionsIndexPage} showEditPage={this.seeEditPage} seeIndexPageFromEdit={this.seeIndexPageFromEdit} currentUser={this.state.currentUser} seeAttractionIndexPage={this.seeAttractionIndexPage}/>
             <div className="footer">
               <button className="button" onClick={() => this.seeHomePageClick()}>Back to Home</button>
             </div>

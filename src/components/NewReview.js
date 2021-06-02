@@ -4,7 +4,7 @@ class NewReview extends Component{
   constructor(props){
     super(props)
     this.state = {
-      createToggle: false,
+      writeReview: false,
       review: ''
     }
   }
@@ -42,9 +42,9 @@ class NewReview extends Component{
     }
   }
 
-  handleToggle = () => {
+  writeReviewToggle = () => {
     this.setState({
-      createToggle: true
+      writeReview: true
     })
   }
 
@@ -61,7 +61,7 @@ class NewReview extends Component{
             <input type="submit" value="Add Review" />
           </form>
           :
-          <button className="button" onClick={() => this.handleToggle()}>Write a review!</button>
+          <button className="button" onClick={() => this.writeReviewToggle()}>Write a review!</button>
         }
       </div>
     )

@@ -16,7 +16,7 @@ class NavBar extends Component {
 
     }
   }
-  //removed currentUser from state , it was this.props.currentUser
+
   seeSignUpToggle = () => {
     this.setState({
       wantsToSignUp: true
@@ -40,12 +40,7 @@ class NavBar extends Component {
       signedIn: true
     })
   }
-  //highlighted this out, also added .props to where i passed the functions down, also changed currentUser to props instead of state where i pass it down
-  // userIsFound = (user) => {
-  //   this.setState({
-  //     currentUser: user
-  //   })
-  // }
+
 
   logoutUser = async (event) => {
     const url = this.props.baseUrl + '/api/v1/users/logout'
@@ -80,7 +75,7 @@ class NavBar extends Component {
       <div className="navBar">
 
         <button className="navItem" onClick={() => this.props.seeHomePageClick()}> Home </button>
-        <button className="navItem" onClick={() => this.props.seeAttractionClick()}> Attractions </button>
+        <button className="navItem" onClick={() => this.props.seeAttractionIndexPage()}> Attractions </button>
         {
           (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
           &&
