@@ -6,7 +6,13 @@ import NavBar from './components/NavBar'
 
 
 console.log(process.env.NODE_ENV);
-let baseUrl = "http://localhost:8000"
+// let baseUrl = ""
+// if(process.env.NODE_ENV === 'development'){
+//   baseUrl = "http://localhost:8000"
+// } else {
+//   baseUrl = process.env.REACT_APP_BASEURL
+// }
+let baseUrl = process.env.REACT_APP_BASEURL
 
 class App extends Component {
   constructor(props){
