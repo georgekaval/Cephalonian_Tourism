@@ -87,8 +87,8 @@ class App extends Component {
         <NavBar
         currentUser={this.state.currentUser}
           baseUrl={baseUrl}
-          seeAttractionIndexPage={this.seeAttractionIndexPage} s
-          eeHomePageClick={this.seeHomePageClick}
+          seeAttractionIndexPage={this.seeAttractionIndexPage}
+          seeHomePageClick={this.seeHomePageClick}
           userIsFound={this.userIsFound}
         />
         <div>
@@ -97,7 +97,9 @@ class App extends Component {
           ?
           <>
             <AppHome />
-            <button className="button" onClick={() => this.seeAttractionIndexPage()}>See Attractions!</button>
+            <div className="footer">
+              <button className="button" onClick={() => this.seeAttractionIndexPage()}>See Attractions!</button>
+            </div>
           </>
           :
           <>
@@ -106,7 +108,7 @@ class App extends Component {
               seeAttractionShowPage={this.seeAttractionShowPage}
               showAttractionShowPage={this.state.showAttractionShowPage}
               showAttractionsIndexPage={this.state.showAttractionsIndexPage}
-              showEditPage={this.seeEditPage}
+              seeEditPage={this.seeEditPage}
               seeIndexPageFromEdit={this.seeIndexPageFromEdit}
               currentUser={this.state.currentUser}
               seeAttractionIndexPage={this.seeAttractionIndexPage}

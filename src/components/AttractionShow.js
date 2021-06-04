@@ -15,22 +15,24 @@ class  AttractionShow extends Component{
     console.log(this.props.currentUser);
     return(
       <div>
-        <h1 className="header text">{this.state.attraction.name}</h1>
+        <h1 className="headerAttractions">{this.state.attraction.name}</h1>
         <br></br>
         <div className="showContainer">
           <img className='showImage' src={this.state.attraction.image} alt={this.state.attraction.name}></img>
           <div>
             <p className="text showInfo">{this.state.attraction.info}</p>
             <br></br>
-            <h3 className="text"> {this.state.attraction.location}</h3>
+            <h3 className="text"> Location: {this.state.attraction.location}</h3>
           </div>
         </div>
-        <Reviews 
+        <Reviews
           baseUrl={this.props.baseUrl}
           attraction={this.state.attraction}
           currentUser={this.props.currentUser}
         />
-        <button className="button" onClick={() => this.props.seeAttractionIndexPage()}>Back to List of Attractions</button>
+        <div className="centerButtonDiv">
+          <button className="button" onClick={() => this.props.seeAttractionIndexPage()}>Back to List of Attractions</button>
+        </div>
       </div>
 
     )

@@ -1,29 +1,29 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
 
-
 html, body, #root{
-  background-color: #1269C7;
+  /* background-color: #1269C7; */
   width: auto;
   height: auto;
 }
 
 .container{
-
+  padding-top: 5%;
 }
 
 .navBar{
-  width: auto;
-  height: 100px;
-  border-color: white;
+  width: 100%;
+  height: 80px;
   /* background-color: white; */
   display: flex;
   justify-content: space-around;
+  position: fixed;
+  background-color: white;
+  top: 0;
 }
 
 .navItem{
-  margin: 20px;;
-  padding: 10px;
+  margin: 15px;
+  padding: 5px;
   color: #1269C7;
   background-color: white;
   border-color: #1269C7;
@@ -31,33 +31,68 @@ html, body, #root{
   border-width: thick;
   font-size: 20px;
   font-family: 'Fredericka the Great', cursive;
+  cursor: grab;
 }
 
-.homeImage{
-  display: block;
+.homeImageAndHeader{
+  background-image: url("photos/myrtos-beach-kefalonia-greec-1463420.jpeg");
+  background-size: cover;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 100%;
+  height: 500px;
+  display: table;
+}
+
+.header{
+  font-size: 100px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.headerAttractions{
+  font-size: 80px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #1269C7;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.reviewHeader{
+  font-size: 45px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  color: #1269C7;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+p{
+  text-indent: 3em;
 }
 
 .showImage{
   display: block;
   /* margin-left: auto;
   margin-right: auto; */
-  width: 30%;
+  width: 40%;
+  height: 50%;
   margin-left: 10%;
-
 }
 
 .showContainer{
   display: flex;
-
 }
 
 .showInfo{
   margin-left: 10%;
   margin-right: 10%;
-  
 }
 
 .indexStyle{
@@ -72,20 +107,42 @@ html, body, #root{
   width: 300px;
   height: 200px;
   cursor: grab;
+}
 
+.imageButton{
+  background-color: white;
+  border: solid.2px white;
 }
 
 .text{
-  color: white;
+  color: #1269C7;
   text-align: center;
   font-family: 'Fredericka the Great', cursive;
   font-size: 20px;
 }
 
-.header{
-  font-size: 70px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+.reviewText{
+  color: #1269C7;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 20px;
+}
+
+.reviewContainer{
+  width: 500px;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid none;
+  border-color: #1269C7;
+  border-width: thick;
+  padding: 10px;
+}
+
+.userGreeting{
+  color: #1269C7;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 15px;
 }
 
 .info{
@@ -109,7 +166,7 @@ table{
 
 .editForm{
   width: 200px;
-  margin-top: 200px;;
+  margin-top: 200px;
   margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
@@ -125,31 +182,102 @@ table{
   bottom: 80px;
   border-color: white;
   border-width: thin;
-
 }
 
 .textEditForm{
-  color: white;
+  color: #1269C7;
   text-align: center;
   font-family: 'Fredericka the Great', cursive;
+}
+
+.userForm{
+  display: flex;
+}
+
+.textUserForm{
+  color: #1269C7;
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 13px;
+}
+
+.newForm{
+  width: 300px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5px;
+  border-style: solid;
+  border-color: #1269C7;
+  border-width: thick;
+  text-align: center;
 }
 
 input{
   width: 200px;
   color: #1269C7;
+  margin-left: 5px;
 }
 
-
+.textboxInput{
+  height: 200px;
+  width: 250px;
+}
 
 .button{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  color: white;
-  background-color: #1269C7;
+  /* display: block; */
+  margin: auto;
+  color: #1269C7;
+  background-color: white;
   border-style: outset;
-  border-color: white;
+  border-color: #26cbf4;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.centerButtonDiv{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.editDeleteDiv{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.buttonCreateAttraction{
+  color: #1269C7;
+  background-color: white;
+  border-style: outset;
+  border-color: #26cbf4;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.buttonSubmitCreate{
+  color: #1269C7;
+  background-color: white;
+  border-style: outset;
+  border-color: #26cbf4;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.buttonLogOut{
+  color: #1269C7;
+  background-color: white;
+  border-style: outset;
+  border-color: #26cbf4;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+.buttonSignUp{
+  margin-top: 17px;
+  color: #1269C7;
+  background-color: white;
+  border-style: outset;
+  border-color: #26cbf4;
   font-family: 'Fredericka the Great', cursive;
 }
 
@@ -157,7 +285,6 @@ input{
   display: block;
   margin-left: auto;
   margin-right: auto;
-
   margin-top: 20px;
   margin-bottom: 20px;
   color: white;
@@ -168,8 +295,11 @@ input{
 }
 
 .footer{
-  position: static;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;
+  height: 80px;
+  background-color: #26cbf4;
+  display: flex;
+
 }

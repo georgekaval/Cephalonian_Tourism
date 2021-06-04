@@ -56,26 +56,29 @@ class LogIn extends Component{
           (this.state.logInFormToggle && !this.props.logOutFormToggle)
           ?
           <>
-            <h3 className="text">Hello {this.props.currentUser.data.username}!</h3>
+            <h3 className="userGreeting">Hello {this.props.currentUser.data.username}!</h3>
 
-            <button className="button" onClick={() => this.props.logoutUser()}> Log Out </button>
+            <button className="buttonLogOut" onClick={() => this.props.logoutUser()}> Log Out </button>
           </>
           :
-          <form onSubmit={(evt) => this.handleSubmit(evt)}>
-            <br></br>
-            <label className="text" htmlFor="email">Email:</label>
-            <br></br>
-            <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
-            <br></br>
-            <label className="text" htmlFor="username">Username:</label>
-            <br></br>
-            <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
-            <br></br>
-            <label className="text" htmlFor="password">Password:</label>
-            <br></br>
-            <input type="password" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
-            <br></br>
-            <input className="button" type="submit" value="Log In"/>
+          <form className="userForm" onSubmit={(evt) => this.handleSubmit(evt)}>
+            <div>
+              <label className="textUserForm" htmlFor="email">Email:</label>
+              <br></br>
+              <input type="text" id="email" name="email" onChange={(evt) => this.handleChange(evt)} value={this.state.email}/>
+              <br></br>
+              <label className="textUserForm" htmlFor="username">Username:</label>
+              <br></br>
+              <input type="text" id="username" name="username" onChange={(evt) => this.handleChange(evt)} value={this.state.username}/>
+              <br></br>
+            </div>
+            <div>
+              <label className="textUserForm" htmlFor="password">Password:</label>
+              <br></br>
+              <input type="password" id="password" name="password" onChange={(evt) => this.handleChange(evt)} value={this.state.password} />
+              <br></br>
+              <input className="buttonSignUp" type="submit" value="Log In"/>
+            </div>
           </form>
         }
 

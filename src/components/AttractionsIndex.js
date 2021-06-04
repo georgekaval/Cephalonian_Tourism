@@ -155,27 +155,25 @@ class AttractionsIndex extends Component {
       return <span> Loading </span>
     }
     return(
-      <div>
+      <div className="container">
         {
           this.props.showAttractionsIndexPage &&
           <>
-            <h1 className="header text">Attractions</h1>
+            <h1 className="headerAttractions">Attractions</h1>
             <ul  className="indexStyle">
               {this.state.attractions.map(attraction => {
                 return(
                   <div key={attraction.id}>
                     <h3 className="text">{attraction.name}</h3>
-                    <button onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
+                    <button className="imageButton" onClick={() => this.handleClick(attraction.id)}><img className= 'imageAttraction' src={attraction.image} alt={attraction.name}></img></button>
                     <br></br>
-
                     {
                       this.props.admin &&
-                      <>
+                      <div className="editDeleteDiv">
                         <button className="button" onClick={() => this.handleEditToggle(attraction)}>Edit</button>
                         <button className="button" onClick={() => this.deleteAttraction(attraction.id)}>Delete</button>
-                      </>
+                      </div>
                     }
-
                   </div>
                 )
               })}
@@ -192,7 +190,6 @@ class AttractionsIndex extends Component {
                 />
               </>
             }
-
           </>
         }
         {
@@ -218,7 +215,6 @@ class AttractionsIndex extends Component {
               <button className="editButton" content="Submit"> SUBMIT </button>
             </form>
         }
-
         {
           this.props.showAttractionShowPage &&
           <AttractionShow
@@ -228,7 +224,6 @@ class AttractionsIndex extends Component {
             seeAttractionIndexPage={this.props.seeAttractionIndexPage}
           />
         }
-
       </div>
     )
   }

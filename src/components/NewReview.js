@@ -56,14 +56,16 @@ class NewReview extends Component{
         {
           this.state.writeReview
           ?
-          <form onSubmit={(evt) => this.handleSubmit(evt)}>
+          <form className="newForm" onSubmit={(evt) => this.handleSubmit(evt)}>
             <label className="text" htmlFor="name">Review: </label>
-            <input type="text" id="review" name="review" onChange={(evt) => this.handleChange(evt)} value={this.state.review}/>
+            <textarea type="text" id="review" name="review" onChange={(evt) => this.handleChange(evt)} value={this.state.review}/>
             <br></br>
-            <input type="submit" value="Add Review" />
+            <input className="buttonSubmitCreate" type="submit" value="Add Review" />
           </form>
           :
-          <button className="button" onClick={() => this.writeReviewToggle()}>Write a review!</button>
+          <div className="centerButtonDiv">
+            <button className="button" onClick={() => this.writeReviewToggle()}>Write a review!</button>
+          </div>
         }
       </div>
     )

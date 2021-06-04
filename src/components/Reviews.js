@@ -115,21 +115,31 @@ class Reviews extends Component{
     console.log(this.state.attraction);
     console.log(this.state.reviews);
     console.log(this.props.currentUser);
+    // console.log(this.state.reviews.user.id);
+    console.log(this.props.currentUser.data.id);
     console.log('reviews rendered');
     if (!this.state.reviews){
       return <span> Loading </span>
     }
     return(
       <div>
-        <h1 className="text">Reviews</h1>
+        <h1 className="reviewHeader">Reviews</h1>
 
           <ul>
             {this.state.reviews.map(review => {
               return(
-                  <div key={review.id}>
-                      <h3 className="text">{review.user.username}:   {review.review} </h3>
-                      <button className="button" onClick={() => this.handleEditToggle(review)}> Edit </button>
-                      <button className="button" onClick={() => this.deleteReview(review.id)}>Delete</button>
+                  <div className="reviewContainer" key={review.id}>
+                      <h3 className="reviewText"><u>{review.user.username}</u></h3>
+                      <h4 className="reviewText">{review.review}</h4>
+                      {
+                        this.props.currentUser.data.id === review.user.id
+                        &&
+                        <>
+                          <button className="button" onClick={() => this.handleEditToggle(review)}> Edit </button>
+                          <button className="button" onClick={() => this.deleteReview(review.id)}>Delete</button>
+                        </>
+                      }
+
                   </div>
               )
             })}
@@ -144,7 +154,7 @@ class Reviews extends Component{
               attraction={this.state.attraction}
             />
             :
-            <h3>Log in to write a review!</h3>
+            <h3 className="text">Log in to write a review!</h3>
           }
 
           {

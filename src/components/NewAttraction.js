@@ -64,23 +64,30 @@ class NewAttraction extends Component{
         {
           this.state.createToggle
           ?
-          <form onSubmit={(evt) => this.handleSubmit(evt)}>
-            <label htmlFor="name">Name: </label>
+          <form className="newForm" onSubmit={(evt) => this.handleSubmit(evt)}>
+            <label className="text" htmlFor="name">Name: </label>
+            <br></br>
             <input type="text" id="name" name="name" onChange={(evt) => this.handleChange(evt)} value={this.state.name}/>
             <br></br>
-            <label htmlFor="location">Location: </label>
+            <label className="text" htmlFor="location">Location: </label>
+            <br></br>
             <input type="text" id="location" name="location" onChange={(evt) => this.handleChange(evt)}  value={this.state.location}/>
             <br></br>
-            <label htmlFor="image">Image: </label>
+            <label className="text" htmlFor="image">Image: </label>
+            <br></br>
             <input type="text" id="image" name="image" onChange={(evt) => this.handleChange(evt)} value={this.state.image}/>
             <br></br>
-            <label htmlFor="info">Info: </label>
-            <input type="text" id="info" name="info" onChange={(evt) => this.handleChange(evt)} value={this.state.info}/>
+            <label className="text" htmlFor="info">Info: </label>
             <br></br>
-            <input type="submit" value="Add Attraction" />
+            <textarea type="text" className="textboxInput" id="info"  name="info" onChange={(evt) => this.handleChange(evt)} value={this.state.info}/>
+            <br></br>
+
+            <input className="buttonSubmitCreate" type="submit" value="Add Attraction" />
           </form>
           :
-          <button className="button" onClick={() => this.handleToggle()}>Create Attraction</button>
+          <div className="centerButtonDiv">
+            <button className="buttonCreateAttraction" onClick={() => this.handleToggle()}>Create Attraction</button>
+          </div>
         }
 
       </div>
