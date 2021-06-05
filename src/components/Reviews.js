@@ -115,8 +115,6 @@ class Reviews extends Component{
     console.log(this.state.attraction);
     console.log(this.state.reviews);
     console.log(this.props.currentUser);
-    // console.log(this.state.reviews.user.id);
-    console.log(this.props.currentUser.data.id);
     console.log('reviews rendered');
     if (!this.state.reviews){
       return <span> Loading </span>
@@ -132,13 +130,20 @@ class Reviews extends Component{
                       <h3 className="reviewText"><u>{review.user.username}</u></h3>
                       <h4 className="reviewText">{review.review}</h4>
                       {
-                        this.props.currentUser.data.id === review.user.id
+                        this.props.currentUser
                         &&
                         <>
-                          <button className="button" onClick={() => this.handleEditToggle(review)}> Edit </button>
-                          <button className="button" onClick={() => this.deleteReview(review.id)}>Delete</button>
+                        {
+                          this.props.currentUser.data.id === review.user.id
+                          &&
+                          <>
+                            <button className="button" onClick={() => this.handleEditToggle(review)}> Edit </button>
+                            <button className="button" onClick={() => this.deleteReview(review.id)}>Delete</button>
+                          </>
+                        }
                         </>
                       }
+
 
                   </div>
               )

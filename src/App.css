@@ -17,7 +17,10 @@ html, body, #root{
   display: flex;
   justify-content: space-around;
   position: fixed;
-  background-color: white;
+  /* background-color: #26cbf4; */
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
   top: 0;
 }
 
@@ -39,6 +42,7 @@ html, body, #root{
   background-size: cover;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
   width: 100%;
   height: 500px;
   display: table;
@@ -299,7 +303,8 @@ input{
   bottom: 0;
   width: 100%;
   height: 80px;
-  background-color: #26cbf4;
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
   display: flex;
 
 }

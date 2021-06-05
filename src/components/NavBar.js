@@ -52,8 +52,8 @@ class NavBar extends Component {
       const user = await response.json()
       console.log(user)
       if(response.status === 200){
+        this.props.userLoggedOut(user)
         this.setState({
-          currentUser: '',
           logOutFormToggle: true,
           wantsToLogIn: false,
           wantsToSignUp: false,
@@ -71,6 +71,7 @@ class NavBar extends Component {
     console.log(this.state.wantsToLogIn);
     console.log(this.state.wantsToSignUp);
     console.log(this.props.currentUser);
+    console.log(this.state.logOutFormToggle);
     return(
       <div className="navBar">
 
@@ -101,11 +102,12 @@ class NavBar extends Component {
           this.state.wantsToLogIn
           &&
           <LogIn
-            baseUrl={this.props.baseUrl} 
+            baseUrl={this.props.baseUrl}
             signedInToggle={this.signedInToggle}
             userIsFound={this.props.userIsFound}
             currentUser={this.props.currentUser}
             logoutUser={this.logoutUser}
+            logOutFormToggle={this.state.logOutFormToggle}
           />
         }
 

@@ -75,6 +75,12 @@ class App extends Component {
     })
   }
 
+  userLoggedOut = (user) => {
+    this.setState({
+      currentUser: user,
+      admin: false
+    })
+  }
   // Need a toggle so when a new review is created, it stays on attraction show page.
   // If you put the wrong username or password in, the frontend still acts like logged in ex. says Hello !
   // Need to fix how create review looks
@@ -85,11 +91,12 @@ class App extends Component {
     return(
       <div>
         <NavBar
-        currentUser={this.state.currentUser}
+          currentUser={this.state.currentUser}
           baseUrl={baseUrl}
           seeAttractionIndexPage={this.seeAttractionIndexPage}
           seeHomePageClick={this.seeHomePageClick}
           userIsFound={this.userIsFound}
+          userLoggedOut={this.userLoggedOut}
         />
         <div>
         {

@@ -50,6 +50,7 @@ class LogIn extends Component{
   }
 
   render(){
+    console.log(this.props.logOutFormToggle);
     return(
       <div>
         {
