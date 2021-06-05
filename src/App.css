@@ -195,7 +195,13 @@ table{
 }
 
 .userForm{
-  display: flex;
+  position: relative;
+  top: 120px;
+  right: 400px;
+  background-color: white;
+  padding: 10px;
+  border: solid .2em;
+  border-color: #1269C7;
 }
 
 .textUserForm{

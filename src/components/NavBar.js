@@ -81,8 +81,8 @@ class NavBar extends Component {
           (!this.state.signedIn && !this.state.wantsToSignUp && !this.state.wantsToLogIn)
           &&
           <>
-            <button className="navItem" onClick={() => this.seeSignUpToggle()}> Sign Up </button>
-            <button className="navItem" onClick={() => this.seeLogInToggle()}> Log In </button>
+            <button className="navItem session" onClick={() => this.seeSignUpToggle()}> Sign Up </button>
+            <button className="navItem session" onClick={() => this.seeLogInToggle()}> Log In </button>
           </>
 
 
