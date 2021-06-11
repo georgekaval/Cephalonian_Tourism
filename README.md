@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Cephalonian_Tourism
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Wireframe] (Wireframe.png)
 
-## Available Scripts
+[View Backend Repo] (https://github.com/georgekaval/Cephalonian_Tourism_Backend)
 
-In the project directory, you can run:
+[View Site] (https://tourism-frontend.herokuapp.com/)
 
-### `npm start`
+Technologies Used: React, Postgresql, Heroku, Rest Api Server, Flask, Peewee.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+User Stories:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* User will land on a home page which gives information and photos of the island.  
 
-### `npm test`
+* User will be able to click on an attraction from a list and will get images and information of the attraction.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* User can create a username and log in.
 
-### `npm run build`
+* When logged in, the user can add a review to an attraction.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* When logged in, the user can edit and delete their review.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Data Models:
+Users: username, email, password
+Attractions: name, location, image, info
+Reviews: review, user, attractions
+There will be a one to many association between attractions and reviews.
+There will also be a one to many association between users and reviews.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This is a tourism site for the island of Kefalonia, Greece.  Users will be those traveling to the island, have been to the island or those thinking of visiting.  This site is designed to be a one stop shop for all the has to do with tourism in Kefalonia.  You will be able to get the most of your vacation by seeing what are the top sites, and if they fit into your type of attraction by the info on them and the reviews from other tourists.  I used React for my frontend that made requests to my backend which I used Flask and peewee to connect to Postgresql.  In Postgresql I have three tables, one for attractions, one for reviews and one for users.  I have made relations between the users and reviews, and the reviews with the attractions.  
 
-### `npm run eject`
+Stretch Goals:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Google maps of each attraction
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Attractions will be split into different components, one for beaches, one for historical sites, one for towns.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Users that are logged in will be able to add attractions to a favorites list and they will be able to see the whole list, and of course delete attractions from it.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Users can customize their favorites list to be like an itinerary.  So they can add the attractions to date and time slots.
